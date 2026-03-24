@@ -1,0 +1,1527 @@
+<!DOCTYPE html>
+<!-- saved from url=(0082)file:///Users/ausitnmcnair/Downloads/Policy_Debate_101_Cadet_Training_Academy.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Policy Debate 101 — Cadet Training Academy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com/">
+<link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
+<link href="./Policy Debate 101 — Cadet Training Academy_files/css2" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg: #0B0E14;
+  --bg-card: rgba(15, 20, 30, 0.7);
+  --bg-glass: rgba(20, 28, 45, 0.55);
+  --border: rgba(100, 200, 255, 0.12);
+  --border-hover: rgba(100, 200, 255, 0.3);
+  --text-primary: #E8ECF4;
+  --text-secondary: #8899B0;
+  --cyan: #00e5ff;
+  --amber: #ffab00;
+  --lime: #76ff03;
+  --pink: #ff4081;
+  --purple: #7c4dff;
+  --orange: #ff6e40;
+  --gold: #ffd740;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  min-height: 100vh;
+  background: linear-gradient(170deg, var(--bg) 0%, #0d1420 40%, #111827 100%);
+  color: var(--text-primary);
+  font-family: 'DM Sans', 'Nunito', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 3px; }
+
+button:focus-visible, a:focus-visible {
+  outline: 2px solid var(--cyan);
+  outline-offset: 2px;
+}
+
+/* ═══ ANIMATIONS ═══ */
+@keyframes fadeSlideIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes pulseGlow {
+  0%, 100% { opacity: 0.6; }
+  50% { opacity: 1; }
+}
+@keyframes shimmer {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+@keyframes confetti-fall {
+  0% { transform: translateY(-10px) rotate(0deg); opacity: 1; }
+  100% { transform: translateY(40px) rotate(360deg); opacity: 0; }
+}
+
+.animate-in { animation: fadeSlideIn 0.45s ease forwards; }
+.stagger-1 { animation-delay: 0.05s; opacity: 0; }
+.stagger-2 { animation-delay: 0.1s; opacity: 0; }
+.stagger-3 { animation-delay: 0.15s; opacity: 0; }
+.stagger-4 { animation-delay: 0.2s; opacity: 0; }
+.stagger-5 { animation-delay: 0.25s; opacity: 0; }
+.stagger-6 { animation-delay: 0.3s; opacity: 0; }
+.stagger-7 { animation-delay: 0.35s; opacity: 0; }
+
+/* ═══ GLASS CARD ═══ */
+.glass-card {
+  background: var(--bg-glass);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 24px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.3);
+}
+.glass-card.clickable { cursor: pointer; }
+.glass-card.clickable:hover {
+  border-color: var(--border-hover);
+  box-shadow: 0 0 20px rgba(100,200,255,0.08), inset 0 0 30px rgba(100,200,255,0.03);
+  transform: translateY(-2px);
+}
+
+/* ═══ GLOW TEXT ═══ */
+.glow-cyan { color: var(--cyan); text-shadow: 0 0 8px rgba(0,229,255,0.4), 0 0 20px rgba(0,229,255,0.2); }
+.glow-amber { color: var(--amber); text-shadow: 0 0 8px rgba(255,171,0,0.4), 0 0 20px rgba(255,171,0,0.2); }
+.glow-lime { color: var(--lime); text-shadow: 0 0 8px rgba(118,255,3,0.4), 0 0 20px rgba(118,255,3,0.2); }
+.glow-pink { color: var(--pink); text-shadow: 0 0 8px rgba(255,64,129,0.4), 0 0 20px rgba(255,64,129,0.2); }
+.glow-purple { color: var(--purple); text-shadow: 0 0 8px rgba(124,77,255,0.4), 0 0 20px rgba(124,77,255,0.2); }
+
+/* ═══ NAV BAR ═══ */
+.nav-bar {
+  position: sticky; top: 0; z-index: 100;
+  background: rgba(11,14,20,0.88);
+  backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+  padding: 12px 20px;
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+}
+.nav-logo { display: flex; align-items: center; gap: 10px; cursor: pointer; text-decoration: none; }
+.nav-logo-icon { font-size: 24px; }
+.nav-logo-title { font-size: 16px; font-weight: 800; letter-spacing: 1px; line-height: 1.1; }
+.nav-logo-sub { font-size: 10px; color: var(--text-secondary); letter-spacing: 2px; text-transform: uppercase; }
+.nav-buttons { display: flex; gap: 6px; flex-wrap: wrap; }
+.nav-btn {
+  padding: 8px 14px; border-radius: 10px; border: 1px solid rgba(255,255,255,0.08);
+  background: transparent; color: var(--text-secondary); font-size: 13px; font-weight: 600;
+  cursor: pointer; font-family: inherit; transition: all 0.2s; white-space: nowrap;
+}
+.nav-btn.active-cyan { border-color: rgba(0,229,255,0.27); background: rgba(0,229,255,0.07); color: var(--cyan); }
+.nav-btn.active-amber { border-color: rgba(255,171,0,0.27); background: rgba(255,171,0,0.07); color: var(--amber); }
+.nav-btn.active-lime { border-color: rgba(118,255,3,0.27); background: rgba(118,255,3,0.07); color: var(--lime); }
+.nav-btn.active-purple { border-color: rgba(124,77,255,0.27); background: rgba(124,77,255,0.07); color: var(--purple); }
+
+/* ═══ MAIN CONTAINER ═══ */
+.main-content { position: relative; z-index: 1; max-width: 900px; margin: 0 auto; padding: 24px 16px 80px; }
+
+/* ═══ HERO ═══ */
+.hero { text-align: center; margin: 24px 0 40px; }
+.hero-icon { font-size: 48px; margin-bottom: 8px; }
+.hero h1 { font-size: clamp(28px, 5vw, 44px); font-weight: 800; letter-spacing: -1px; line-height: 1.1; }
+.hero p { margin: 12px auto 0; max-width: 520px; font-size: 16px; color: var(--text-secondary); line-height: 1.6; }
+
+/* ═══ STATS GRID ═══ */
+.stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 12px; margin-bottom: 32px; }
+.stat-card { text-align: center; padding: 16px !important; }
+.stat-label { font-size: 11px; text-transform: uppercase; letter-spacing: 1.5px; color: var(--text-secondary); margin-bottom: 6px; font-weight: 600; }
+.stat-value { font-size: 22px; font-weight: 800; }
+
+/* ═══ PROGRESS BAR ═══ */
+.progress-container { margin-bottom: 32px; }
+.progress-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+.progress-label { font-size: 13px; font-weight: 700; color: var(--text-secondary); letter-spacing: 1px; text-transform: uppercase; }
+.progress-pct { font-size: 13px; color: var(--cyan); font-weight: 700; }
+.progress-track { height: 8px; border-radius: 4px; background: rgba(255,255,255,0.06); overflow: hidden; }
+.progress-fill { height: 100%; border-radius: 4px; background: linear-gradient(90deg, var(--cyan), var(--purple)); transition: width 0.6s ease; }
+
+/* ═══ SECTION LABEL ═══ */
+.section-label { font-size: 13px; font-weight: 700; color: var(--text-secondary); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 12px; }
+
+/* ═══ BADGE ═══ */
+.badge { display: inline-flex; align-items: center; gap: 8px; padding: 6px 14px; border-radius: 24px; font-size: 13px; font-weight: 600; letter-spacing: 0.5px; transition: all 0.3s ease; }
+.badge-icon { font-size: 16px; }
+.badge.earned { opacity: 1; }
+.badge.locked { opacity: 0.45; border-color: rgba(255,255,255,0.1) !important; color: var(--text-secondary) !important; background: rgba(255,255,255,0.03) !important; }
+.badges-row { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 32px; }
+
+/* ═══ MODULE GRID ═══ */
+.module-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; }
+.module-card { position: relative; overflow: hidden; }
+.module-card .accent-bar { position: absolute; top: 0; left: 0; right: 0; height: 3px; }
+.module-header { display: flex; align-items: flex-start; gap: 14px; }
+.module-icon { font-size: 32px; line-height: 1; }
+.module-title { font-size: 16px; font-weight: 800; color: var(--text-primary); line-height: 1.3; }
+.module-subtitle { font-size: 13px; color: var(--text-secondary); line-height: 1.4; margin-top: 4px; }
+.module-progress { margin-top: 16px; display: flex; align-items: center; gap: 10px; }
+.module-track { flex: 1; height: 4px; border-radius: 2px; background: rgba(255,255,255,0.06); overflow: hidden; }
+.module-fill { height: 100%; border-radius: 2px; transition: width 0.4s ease; }
+.module-count { font-size: 12px; font-weight: 700; white-space: nowrap; }
+
+/* ═══ BACK BUTTON ═══ */
+.back-btn { background: none; border: none; color: var(--text-secondary); font-size: 14px; cursor: pointer; margin-bottom: 16px; display: flex; align-items: center; gap: 8px; font-family: inherit; padding: 0; transition: color 0.2s; }
+.back-btn:hover { color: var(--text-primary); }
+.back-btn .arrow { font-size: 18px; }
+
+/* ═══ MODULE DETAIL HEADER ═══ */
+.detail-header { margin-bottom: 24px; position: relative; overflow: hidden; }
+.detail-header .accent-bar { position: absolute; top: 0; left: 0; right: 0; height: 3px; }
+.detail-header-row { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+.detail-icon { font-size: 40px; }
+.detail-title { font-size: 26px; font-weight: 800; color: var(--text-primary); }
+.detail-subtitle { font-size: 14px; color: var(--text-secondary); margin-top: 4px; }
+.detail-progress-ring { text-align: center; }
+.progress-ring { transform: rotate(-90deg); }
+.progress-ring-bg { fill: none; stroke: rgba(255,255,255,0.06); }
+.progress-ring-fill { fill: none; stroke-linecap: round; transition: stroke-dashoffset 0.6s ease; }
+.ring-label { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; }
+.badge-earned-banner { margin-top: 16px; padding: 10px 16px; border-radius: 12px; display: flex; align-items: center; gap: 10px; }
+.badge-earned-text { font-size: 13px; font-weight: 600; }
+
+/* ═══ LESSON LIST ═══ */
+.lesson-list { display: flex; flex-direction: column; gap: 10px; }
+.lesson-item { padding: 16px 20px !important; }
+.lesson-row { display: flex; align-items: center; gap: 14px; }
+.lesson-number { width: 36px; height: 36px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 800; flex-shrink: 0; transition: all 0.3s; }
+.lesson-title-text { font-size: 15px; font-weight: 700; color: var(--text-primary); }
+.lesson-duration { font-size: 12px; color: var(--text-secondary); margin-top: 2px; }
+.lesson-arrow { color: var(--text-secondary); font-size: 18px; }
+
+/* ═══ LESSON VIEW ═══ */
+.lesson-view { max-width: 720px; margin: 0 auto; }
+.lesson-module-label { font-size: 11px; text-transform: uppercase; letter-spacing: 2px; font-weight: 700; margin-bottom: 6px; }
+.lesson-heading { font-size: 28px; font-weight: 800; color: var(--text-primary); letter-spacing: -0.5px; margin-bottom: 4px; }
+.lesson-meta { font-size: 13px; color: var(--text-secondary); margin-bottom: 24px; }
+.lesson-body { color: var(--text-secondary); font-size: 15px; line-height: 1.75; }
+.lesson-body p { margin-bottom: 12px; }
+.lesson-body strong { color: var(--text-primary); font-weight: 700; }
+.lesson-body .bullet-line { display: flex; gap: 10px; margin-left: 8px; margin-bottom: 4px; line-height: 1.7; }
+.bullet-marker { color: var(--cyan); flex-shrink: 0; }
+.num-marker { flex-shrink: 0; font-weight: 700; font-size: 13px; min-width: 18px; color: var(--amber); }
+
+.complete-btn-area { margin-top: 32px; display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; }
+.complete-btn, .quiz-start-btn {
+  padding: 12px 36px; border-radius: 12px; font-weight: 700; font-size: 15px;
+  cursor: pointer; letter-spacing: 0.5px; font-family: inherit; transition: all 0.2s;
+}
+.complete-btn:hover, .quiz-start-btn:hover { filter: brightness(1.15); }
+.completed-label { padding: 12px 36px; border-radius: 12px; font-weight: 700; font-size: 15px; letter-spacing: 0.5px; }
+
+/* ═══ TIMER ═══ */
+.timer-view { padding-top: 24px; }
+.timer-header { text-align: center; margin-bottom: 32px; }
+.timer-header h2 { font-size: 28px; font-weight: 800; }
+.timer-header p { margin: 8px 0 0; color: var(--text-secondary); font-size: 14px; }
+.timer-card { text-align: center; max-width: 420px; margin: 0 auto; }
+.timer-label { font-size: 13px; text-transform: uppercase; letter-spacing: 2px; color: var(--text-secondary); margin-bottom: 12px; font-weight: 700; }
+.timer-selectors { display: flex; flex-wrap: wrap; gap: 6px; justify-content: center; margin-bottom: 20px; }
+.timer-select-btn { padding: 6px 12px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.1); background: transparent; color: var(--text-secondary); font-size: 12px; font-weight: 600; cursor: pointer; font-family: inherit; transition: all 0.2s; }
+.timer-select-btn.active { border-color: var(--cyan); background: rgba(0,229,255,0.07); color: var(--cyan); }
+.timer-display { font-size: clamp(52px, 12vw, 72px); font-weight: 800; font-family: 'JetBrains Mono', monospace; line-height: 1; margin-bottom: 8px; letter-spacing: 4px; transition: color 0.5s, text-shadow 0.5s; }
+.timer-progress-track { height: 4px; border-radius: 2px; background: rgba(255,255,255,0.06); margin: 16px auto; max-width: 300px; overflow: hidden; }
+.timer-progress-fill { height: 100%; border-radius: 2px; transition: width 1s linear, background 0.5s; }
+.timer-controls { display: flex; gap: 12px; justify-content: center; margin-top: 16px; flex-wrap: wrap; }
+.timer-btn { padding: 10px 28px; border-radius: 12px; font-size: 15px; font-weight: 700; cursor: pointer; letter-spacing: 1px; font-family: inherit; transition: all 0.2s; }
+.timer-btn:hover { filter: brightness(1.15); }
+.timer-ref { max-width: 420px; margin: 32px auto 0; }
+.timer-ref-row { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid var(--border); font-size: 14px; }
+.timer-ref-label { color: var(--text-secondary); }
+.timer-ref-time { color: var(--cyan); font-weight: 700; font-family: 'JetBrains Mono', monospace; }
+
+/* ═══ QUIZ STYLES ═══ */
+.quiz-container { max-width: 600px; margin: 0 auto; }
+.quiz-question-text { font-size: 18px; font-weight: 700; color: var(--text-primary); margin-bottom: 20px; line-height: 1.5; }
+.quiz-progress-text { font-size: 12px; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 8px; font-weight: 600; }
+.quiz-option {
+  display: block; width: 100%; padding: 14px 18px; margin-bottom: 10px;
+  border-radius: 12px; border: 1px solid var(--border); background: rgba(255,255,255,0.03);
+  color: var(--text-primary); font-size: 15px; font-weight: 500; text-align: left;
+  cursor: pointer; font-family: inherit; transition: all 0.2s; line-height: 1.5;
+}
+.quiz-option:hover:not(.selected):not(.correct):not(.wrong) { border-color: var(--border-hover); background: rgba(255,255,255,0.06); }
+.quiz-option.selected { border-color: var(--cyan); background: rgba(0,229,255,0.1); color: var(--cyan); }
+.quiz-option.correct { border-color: var(--lime); background: rgba(118,255,3,0.12); color: var(--lime); }
+.quiz-option.wrong { border-color: #ff1744; background: rgba(255,23,68,0.12); color: #ff1744; }
+.quiz-option.disabled { pointer-events: none; opacity: 0.6; }
+.quiz-feedback { margin-top: 16px; padding: 12px 16px; border-radius: 12px; font-size: 14px; font-weight: 600; }
+.quiz-next-btn {
+  margin-top: 16px; padding: 10px 28px; border-radius: 10px; font-weight: 700; font-size: 14px;
+  cursor: pointer; font-family: inherit; border: 1px solid rgba(0,229,255,0.4); background: rgba(0,229,255,0.1); color: var(--cyan); transition: all 0.2s;
+}
+.quiz-next-btn:hover { background: rgba(0,229,255,0.2); }
+
+/* ═══ QUIZ RESULTS ═══ */
+.quiz-results { text-align: center; }
+.quiz-score-big { font-size: 64px; font-weight: 800; font-family: 'JetBrains Mono', monospace; margin: 16px 0; }
+.quiz-xp-earned { font-size: 18px; font-weight: 700; margin: 8px 0 24px; }
+
+/* ═══ PERFORMANCE DASHBOARD ═══ */
+.perf-grid { display: grid; grid-template-columns: 1fr; gap: 16px; }
+.perf-module-row {
+  display: flex; align-items: center; gap: 16px; padding: 16px 20px;
+  cursor: pointer;
+}
+.perf-module-row:hover { border-color: var(--border-hover); }
+.perf-icon { font-size: 28px; flex-shrink: 0; }
+.perf-info { flex: 1; min-width: 0; }
+.perf-module-name { font-size: 15px; font-weight: 700; }
+.perf-stats-row { display: flex; gap: 16px; margin-top: 6px; flex-wrap: wrap; }
+.perf-stat { font-size: 12px; color: var(--text-secondary); }
+.perf-stat strong { color: var(--text-primary); }
+.perf-bar-track { height: 6px; border-radius: 3px; background: rgba(255,255,255,0.06); margin-top: 8px; overflow: hidden; }
+.perf-bar-fill { height: 100%; border-radius: 3px; transition: width 0.6s ease; }
+
+/* ═══ XP BAR ═══ */
+.xp-bar-container { margin-bottom: 32px; }
+.xp-bar-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; }
+.xp-rank { font-size: 14px; font-weight: 700; }
+.xp-next { font-size: 12px; color: var(--text-secondary); }
+.xp-bar-track { height: 10px; border-radius: 5px; background: rgba(255,255,255,0.06); overflow: hidden; position: relative; }
+.xp-bar-fill { height: 100%; border-radius: 5px; background: linear-gradient(90deg, var(--amber), var(--gold)); transition: width 0.6s ease; }
+
+/* ═══ SCORE HISTORY ═══ */
+.score-history { display: flex; gap: 6px; align-items: flex-end; height: 40px; margin-top: 8px; }
+.score-bar { min-width: 8px; border-radius: 3px 3px 0 0; transition: height 0.3s ease; }
+
+/* ═══ STAR CANVAS ═══ */
+#starfield { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
+.hidden { display: none !important; }
+
+/* ═══ PASSCODE MODAL ═══ */
+.modal-overlay {
+  position: fixed; inset: 0; z-index: 200;
+  background: rgba(5, 8, 14, 0.85);
+  backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+  display: flex; align-items: center; justify-content: center;
+  padding: 20px;
+  animation: fadeSlideIn 0.25s ease forwards;
+}
+.modal-box {
+  background: rgba(15, 20, 35, 0.95);
+  border: 1px solid rgba(124, 77, 255, 0.25);
+  border-radius: 20px;
+  padding: 32px;
+  max-width: 380px;
+  width: 100%;
+  text-align: center;
+  box-shadow: 0 16px 64px rgba(0,0,0,0.6), 0 0 40px rgba(124,77,255,0.08);
+}
+.modal-icon { font-size: 40px; margin-bottom: 12px; }
+.modal-title { font-size: 20px; font-weight: 800; color: var(--text-primary); margin-bottom: 6px; }
+.modal-subtitle { font-size: 14px; color: var(--text-secondary); margin-bottom: 20px; line-height: 1.5; }
+.modal-input {
+  width: 100%; padding: 12px 16px; border-radius: 12px;
+  border: 1px solid rgba(124, 77, 255, 0.3);
+  background: rgba(255,255,255,0.04);
+  color: var(--text-primary); font-size: 18px; font-weight: 700;
+  font-family: 'JetBrains Mono', monospace; text-align: center;
+  letter-spacing: 6px; outline: none; transition: all 0.2s;
+  -webkit-text-security: disc;
+}
+.modal-input:focus { border-color: var(--purple); box-shadow: 0 0 16px rgba(124,77,255,0.15); }
+.modal-input.error { border-color: #ff1744; box-shadow: 0 0 16px rgba(255,23,68,0.15); animation: shake 0.4s ease; }
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  20%, 60% { transform: translateX(-6px); }
+  40%, 80% { transform: translateX(6px); }
+}
+.modal-error-text { font-size: 13px; color: #ff6b7a; margin-top: 8px; min-height: 20px; }
+.modal-btns { display: flex; gap: 10px; margin-top: 16px; justify-content: center; }
+.modal-btn {
+  padding: 10px 24px; border-radius: 10px; font-weight: 700; font-size: 14px;
+  cursor: pointer; font-family: inherit; transition: all 0.2s;
+}
+.modal-btn:hover { filter: brightness(1.15); }
+.modal-btn-primary { border: 1px solid rgba(124,77,255,0.5); background: rgba(124,77,255,0.2); color: var(--purple); }
+.modal-btn-secondary { border: 1px solid rgba(255,255,255,0.1); background: transparent; color: var(--text-secondary); }
+
+/* ═══ MOBILE ═══ */
+@media (max-width: 600px) {
+  .nav-bar { padding: 10px 12px; }
+  .nav-logo-title { font-size: 14px; }
+  .nav-btn { padding: 6px 10px; font-size: 11px; }
+  .glass-card { padding: 16px; border-radius: 12px; }
+  .module-grid { grid-template-columns: 1fr; }
+  .detail-header-row { flex-direction: column; align-items: flex-start; }
+  .lesson-heading { font-size: 22px; }
+  .stats-grid { grid-template-columns: repeat(2, 1fr); }
+}
+</style>
+</head>
+<body>
+
+<canvas id="starfield" width="1455" height="1019"></canvas>
+
+<nav class="nav-bar">
+  <div class="nav-logo" onclick="goHome()">
+    <span class="nav-logo-icon">🛸</span>
+    <div>
+      <div class="nav-logo-title glow-cyan">POLICY DEBATE 101</div>
+      <div class="nav-logo-sub">Cadet Training Academy</div>
+    </div>
+  </div>
+  <div class="nav-buttons">
+    <button id="navModulesBtn" class="nav-btn active-cyan" onclick="goHome()">Modules</button>
+    <button id="navPerfBtn" class="nav-btn" onclick="goPerformance()">🔒 Coach</button>
+    <button id="navTimerBtn" class="nav-btn" onclick="goTimer()">⏱ Timer</button>
+  </div>
+</nav>
+
+<main class="main-content" id="app">
+    <div class="animate-in">
+      <div class="hero">
+        <div class="hero-icon">🛸</div>
+        <h1>Welcome to <span class="glow-cyan">Policy Debate 101</span></h1>
+        <p>Your mission: learn policy debate one module at a time. Complete lessons, take quizzes, and rank up from Cadet to Commander.</p>
+      </div>
+      <div class="stats-grid">
+        <div class="glass-card stat-card">
+          <div class="stat-label">Lessons</div>
+          <div class="stat-value glow-cyan">0/21</div>
+        </div>
+        <div class="glass-card stat-card">
+          <div class="stat-label">Badges</div>
+          <div class="stat-value glow-amber">0/7</div>
+        </div>
+        <div class="glass-card stat-card">
+          <div class="stat-label">XP</div>
+          <div class="stat-value glow-lime">0</div>
+        </div>
+        <div class="glass-card stat-card">
+          <div class="stat-label">Rank</div>
+          <div class="stat-value glow-purple">🌑 New Cadet</div>
+        </div>
+      </div>
+      <div class="xp-bar-container">
+        <div class="xp-bar-header">
+          <span class="xp-rank" style="color:var(--gold)">🌑 New Cadet</span>
+          <span class="xp-next">50 XP to Cadet</span>
+        </div>
+        <div class="xp-bar-track"><div class="xp-bar-fill" style="width:0%"></div></div>
+      </div>
+      <div class="progress-container">
+        <div class="progress-header">
+          <span class="progress-label">Mission Progress</span>
+          <span class="progress-pct">0%</span>
+        </div>
+        <div class="progress-track"><div class="progress-fill" style="width:0%"></div></div>
+      </div>
+      
+      <div class="section-label">Training Modules</div>
+      <div class="module-grid">
+      <div class="glass-card clickable module-card animate-in stagger-1" onclick="openModule(&#39;welcome&#39;)" onmouseenter="this.style.borderColor=&#39;#00e5ff44&#39;;this.style.boxShadow=&#39;0 0 20px #00e5ff22, inset 0 0 30px #00e5ff08&#39;" onmouseleave="this.style.borderColor=&#39;&#39;;this.style.boxShadow=&#39;&#39;">
+        <div class="accent-bar" style="background:linear-gradient(90deg,#00e5ff,transparent);opacity:0.5"></div>
+        <div class="module-header">
+          <div class="module-icon" style="filter:grayscale(0.3)">🚀</div>
+          <div style="flex:1;min-width:0">
+            <div class="module-title">Welcome Aboard, Cadet</div>
+            <div class="module-subtitle">Your mission briefing begins here</div>
+          </div>
+        </div>
+        <div class="module-progress">
+          <div class="module-track"><div class="module-fill" style="width:0%;background:#00e5ff"></div></div>
+          <span class="module-count" style="color:var(--text-secondary)">0/3</span>
+        </div>
+        
+        
+      </div>
+      <div class="glass-card clickable module-card animate-in stagger-2" onclick="openModule(&#39;stock-issues&#39;)" onmouseenter="this.style.borderColor=&#39;#ffab0044&#39;;this.style.boxShadow=&#39;0 0 20px #ffab0022, inset 0 0 30px #ffab0008&#39;" onmouseleave="this.style.borderColor=&#39;&#39;;this.style.boxShadow=&#39;&#39;">
+        <div class="accent-bar" style="background:linear-gradient(90deg,#ffab00,transparent);opacity:0.5"></div>
+        <div class="module-header">
+          <div class="module-icon" style="filter:grayscale(0.3)">🛡️</div>
+          <div style="flex:1;min-width:0">
+            <div class="module-title">The 5 Stock Issues</div>
+            <div class="module-subtitle">The five systems that power every debate</div>
+          </div>
+        </div>
+        <div class="module-progress">
+          <div class="module-track"><div class="module-fill" style="width:0%;background:#ffab00"></div></div>
+          <span class="module-count" style="color:var(--text-secondary)">0/6</span>
+        </div>
+        
+        
+      </div>
+      <div class="glass-card clickable module-card animate-in stagger-3" onclick="openModule(&#39;aff-case&#39;)" onmouseenter="this.style.borderColor=&#39;#76ff0344&#39;;this.style.boxShadow=&#39;0 0 20px #76ff0322, inset 0 0 30px #76ff0308&#39;" onmouseleave="this.style.borderColor=&#39;&#39;;this.style.boxShadow=&#39;&#39;">
+        <div class="accent-bar" style="background:linear-gradient(90deg,#76ff03,transparent);opacity:0.5"></div>
+        <div class="module-header">
+          <div class="module-icon" style="filter:grayscale(0.3)">⚡</div>
+          <div style="flex:1;min-width:0">
+            <div class="module-title">Building Your Aff Case</div>
+            <div class="module-subtitle">Construct your first case from the ground up</div>
+          </div>
+        </div>
+        <div class="module-progress">
+          <div class="module-track"><div class="module-fill" style="width:0%;background:#76ff03"></div></div>
+          <span class="module-count" style="color:var(--text-secondary)">0/3</span>
+        </div>
+        
+        
+      </div>
+      <div class="glass-card clickable module-card animate-in stagger-4" onclick="openModule(&#39;neg-strategy&#39;)" onmouseenter="this.style.borderColor=&#39;#ff408144&#39;;this.style.boxShadow=&#39;0 0 20px #ff408122, inset 0 0 30px #ff408108&#39;" onmouseleave="this.style.borderColor=&#39;&#39;;this.style.boxShadow=&#39;&#39;">
+        <div class="accent-bar" style="background:linear-gradient(90deg,#ff4081,transparent);opacity:0.5"></div>
+        <div class="module-header">
+          <div class="module-icon" style="filter:grayscale(0.3)">🎯</div>
+          <div style="flex:1;min-width:0">
+            <div class="module-title">Negative Strategy</div>
+            <div class="module-subtitle">Learn the Big 6 ways to defeat any case</div>
+          </div>
+        </div>
+        <div class="module-progress">
+          <div class="module-track"><div class="module-fill" style="width:0%;background:#ff4081"></div></div>
+          <span class="module-count" style="color:var(--text-secondary)">0/3</span>
+        </div>
+        
+        
+      </div>
+      <div class="glass-card clickable module-card animate-in stagger-5" onclick="openModule(&#39;flowing&#39;)" onmouseenter="this.style.borderColor=&#39;#7c4dff44&#39;;this.style.boxShadow=&#39;0 0 20px #7c4dff22, inset 0 0 30px #7c4dff08&#39;" onmouseleave="this.style.borderColor=&#39;&#39;;this.style.boxShadow=&#39;&#39;">
+        <div class="accent-bar" style="background:linear-gradient(90deg,#7c4dff,transparent);opacity:0.5"></div>
+        <div class="module-header">
+          <div class="module-icon" style="filter:grayscale(0.3)">📡</div>
+          <div style="flex:1;min-width:0">
+            <div class="module-title">The Art of Flowing</div>
+            <div class="module-subtitle">Track every argument like a mission controller</div>
+          </div>
+        </div>
+        <div class="module-progress">
+          <div class="module-track"><div class="module-fill" style="width:0%;background:#7c4dff"></div></div>
+          <span class="module-count" style="color:var(--text-secondary)">0/2</span>
+        </div>
+        
+        
+      </div>
+      <div class="glass-card clickable module-card animate-in stagger-6" onclick="openModule(&#39;cx-skills&#39;)" onmouseenter="this.style.borderColor=&#39;#ff6e4044&#39;;this.style.boxShadow=&#39;0 0 20px #ff6e4022, inset 0 0 30px #ff6e4008&#39;" onmouseleave="this.style.borderColor=&#39;&#39;;this.style.boxShadow=&#39;&#39;">
+        <div class="accent-bar" style="background:linear-gradient(90deg,#ff6e40,transparent);opacity:0.5"></div>
+        <div class="module-header">
+          <div class="module-icon" style="filter:grayscale(0.3)">🔍</div>
+          <div style="flex:1;min-width:0">
+            <div class="module-title">Cross-Examination</div>
+            <div class="module-subtitle">Become a detective and find the truth</div>
+          </div>
+        </div>
+        <div class="module-progress">
+          <div class="module-track"><div class="module-fill" style="width:0%;background:#ff6e40"></div></div>
+          <span class="module-count" style="color:var(--text-secondary)">0/2</span>
+        </div>
+        
+        
+      </div>
+      <div class="glass-card clickable module-card animate-in stagger-7" onclick="openModule(&#39;tournament-prep&#39;)" onmouseenter="this.style.borderColor=&#39;#ffd74044&#39;;this.style.boxShadow=&#39;0 0 20px #ffd74022, inset 0 0 30px #ffd74008&#39;" onmouseleave="this.style.borderColor=&#39;&#39;;this.style.boxShadow=&#39;&#39;">
+        <div class="accent-bar" style="background:linear-gradient(90deg,#ffd740,transparent);opacity:0.5"></div>
+        <div class="module-header">
+          <div class="module-icon" style="filter:grayscale(0.3)">🏆</div>
+          <div style="flex:1;min-width:0">
+            <div class="module-title">Tournament Day</div>
+            <div class="module-subtitle">Prepare for launch and compete with confidence</div>
+          </div>
+        </div>
+        <div class="module-progress">
+          <div class="module-track"><div class="module-fill" style="width:0%;background:#ffd740"></div></div>
+          <span class="module-count" style="color:var(--text-secondary)">0/2</span>
+        </div>
+        
+        
+      </div></div>
+    </div></main>
+
+<script>
+/* ═══════════════════════════════════════════════════════
+   MODULE DATA
+   ═══════════════════════════════════════════════════════ */
+const MODULES = [
+  {
+    id: "welcome", title: "Welcome Aboard, Cadet", subtitle: "Your mission briefing begins here",
+    icon: "🚀", badge: { name: "Cadet Badge", icon: "🎖️" }, color: "#00e5ff",
+    lessons: [
+      { id: "what-is-debate", title: "What Is Policy Debate?", duration: "5 min",
+        content: `Think about the last time you and a friend argued about which lunch option is better. You each had reasons. You each tried to convince the other person. That's basically a debate!\n\n**Policy debate** is like that — but bigger and with rules. (Tech Briefing: "Policy" means a plan or rule made by the government.)\n\nHere's how it works: Two teams of two face off. The **Affirmative team** (or "Aff") says, "Here is a problem, and here is our plan to fix it." The **Negative team** (or "Neg") says, "Nope — that plan is a bad idea."\n\nEvery debater in the country argues the same big topic for the whole year. So you and your Co-Pilot will become experts on one subject!\n\nYour job as a Cadet is to **scan the evidence**, **think hard**, and **explain your ideas clearly**. You don't need to be the loudest person in the room. You need to be the most prepared.\n\nWelcome to the mission, Cadet. This is going to be a challenge — and you are ready for it.` },
+      { id: "debate-structure", title: "The Debate Round Structure", duration: "7 min",
+        content: `Every debate round follows the same order of speeches — like a playlist that never changes. Here's your flight plan:\n\n**Constructive Speeches (8 minutes each):**\n(Tech Briefing: "Constructive" means "building." These are the speeches where each team builds their arguments.)\n• 1st Affirmative Constructive (1AC)\n• 1st Negative Constructive (1NC)\n• 2nd Affirmative Constructive (2AC)\n• 2nd Negative Constructive (2NC)\n\n**Cross-Examination (3 minutes each):**\n(Tech Briefing: "Cross-Examination" means question time. After each Constructive, the other team gets to ask questions.)\n\n**Rebuttals (5 minutes each):**\n(Tech Briefing: A "Rebuttal" is your chance to fight back against the other team's points and wrap up your side.)\n• 1st Negative Rebuttal (1NR)\n• 1st Affirmative Rebuttal (1AR)\n• 2nd Negative Rebuttal (2NR)\n• 2nd Affirmative Rebuttal (2AR)\n\n**Prep Time:** Each team gets 8 minutes total to use between speeches however they want. Talk to your Co-Pilot and plan your next move!\n\nNotice something? The Affirmative speaks first AND last. That's because the Aff has the **burden of proof** — they're the ones saying we need to change something, so they get the first and last word.` },
+      { id: "roles", title: "Your Role on the Team", duration: "4 min",
+        content: `In policy debate, you always have a partner. We call them your **Co-Pilot**. Two brains are stronger than one!\n\nEach team member handles different speeches. One person gives the "1st" speeches (like the 1AC and 1AR). The other gives the "2nd" speeches (like the 2AC and 2AR).\n\n**What makes a great Cadet?**\n• **Curiosity** — Ask "why?" about everything\n• **Teamwork** — Prepare with your Co-Pilot, not just by yourself\n• **Research** — The team with the best evidence usually wins\n• **Grit** — You won't be perfect right away, and that's okay\n\nThe best teams are the ones where both partners put in equal work. Talk to your Co-Pilot before every practice. Share your notes. Build your case together.\n\nYou're in this together, Cadet.\n\n**Mission Status:** Feeling a little nervous? That's totally normal. Even experienced Commanders felt nervous at the start. Take a deep breath — you've got this.` }
+    ],
+    quiz: [
+      { q: "Policy debate is a ___ event.", options: ["One-on-one", "Two-on-two", "Three-on-three", "Free-for-all"], correct: 1 },
+      { q: "How long are Constructive speeches?", options: ["3 minutes", "5 minutes", "8 minutes", "10 minutes"], correct: 2 },
+      { q: "Who speaks FIRST and LAST in a debate round?", options: ["The negative team", "The affirmative team", "The judge decides", "It alternates randomly"], correct: 1 },
+      { q: "Why does the affirmative team speak first and last?", options: ["They won the coin toss", "They have the burden of proof", "It's random each round", "The negative always defers"], correct: 1 },
+      { q: "How much prep time does each team get?", options: ["3 minutes", "5 minutes", "8 minutes", "Unlimited"], correct: 2 }
+    ]
+  },
+  {
+    id: "stock-issues", title: "The 5 Stock Issues", subtitle: "The five systems that power every debate",
+    icon: "🛡️", badge: { name: "Stock Issues Shield", icon: "🛡️" }, color: "#ffab00",
+    lessons: [
+      { id: "stock-overview", title: "What Are Stock Issues?", duration: "5 min",
+        content: `Stock Issues are like the core ingredients of a pizza. If you forget the dough, it's not a pizza. If you forget a Stock Issue, it's not a complete debate case!\n\n(Tech Briefing: "Stock Issues" are the five things the Affirmative team MUST prove to win. Think of them as a checklist for the judge.)\n\nThe five Stock Issues are:\n1. **Topicality** — Does the plan fit the topic?\n2. **Significance** — Is the problem a big deal?\n3. **Inherency** — Why can't things stay the way they are?\n4. **Solvency** — Will this plan actually work?\n5. **Disadvantages** — Does the plan cause new problems?\n\nThe Affirmative must prove ALL five. If the Negative knocks out even ONE, the Aff case can fall apart.\n\nThink of these as your ship's five engines. If any one engine fails, the mission is in trouble.` },
+      { id: "topicality", title: "Topicality (T)", duration: "8 min",
+        content: `**Topicality** is like the rules of a board game. Everyone agreed to play by certain rules. If the Affirmative breaks those rules, the Negative can call them out.\n\n(Tech Briefing: "Topicality" means "Does the Aff plan fit inside the topic that everyone agreed to debate?")\n\nImagine the topic says: "The U.S. should change its education policy." But the Aff team talks about building a bridge. That's not education! The Negative team would yell, "That's not topical!"\n\n**How a Topicality argument works — four steps:**\n• **Definition** — The Neg shows what the key words in the topic really mean\n• **Violation** — The Neg explains how the Aff plan breaks that definition\n• **Standards** — The Neg explains why their definition is the fair one\n• **Voter** — The Neg tells the judge why a team that breaks the rules should lose\n\nTopicality is an **off-case** argument. (Tech Briefing: "Off-case" means it doesn't attack the plan itself — it says the plan shouldn't even be allowed in this debate.)\n\nThis one takes practice. Don't worry if it feels tricky at first — that's normal for new Cadets.` },
+      { id: "significance", title: "Significance / Harms", duration: "6 min",
+        content: `**Significance** answers one big question: "Is this problem actually a big deal?"\n\n(Tech Briefing: "Significance" means how serious and widespread the problem is. Sometimes you'll hear debaters call this "Harms.")\n\nIt's like turning in a homework assignment about a topic nobody cares about. The teacher asks, "Why does this matter?" You need a good answer!\n\nThe Affirmative must show two things:\n• **How many people are affected** — Does this hurt 10 people or 10 million?\n• **How badly they are affected** — Is it a small problem or a life-changing one?\n\nFor example: "10 people got a paper cut" is not very significant. "Millions of kids can't get clean drinking water" — that's a huge deal.\n\nThe Negative can fight back by saying the problem isn't as big as the Aff claims. Maybe the numbers are wrong, or maybe the problem is already getting better on its own.` },
+      { id: "inherency", title: "Inherency", duration: "7 min",
+        content: `**Inherency** asks: "Why can't the system we already have fix this problem?"\n\n(Tech Briefing: "Inherency" means the problem is stuck. The current system — called the **Status Quo** — can't solve it without a new plan.)\n\nThink of it this way: If your school's water fountain is already broken and nobody plans to fix it, that's an inherency argument. The problem is "built in" to the current system.\n\nThe Affirmative must show:\n1. The problem exists right now\n2. The current system is NOT fixing it\n3. Small changes alone won't solve it\n\n**Cadet Tip:** If you're on the Negative side, scan for news showing that the current system HAS changed since the Aff's evidence was written. Maybe a new law already passed! That's a powerful move at local tournaments.\n\nTalk to your Co-Pilot about what's happening in the news. Current events can be your best weapon here.` },
+      { id: "solvency", title: "Solvency", duration: "6 min",
+        content: `**Solvency** asks: "Okay, you've got a plan — but will it actually work?"\n\n(Tech Briefing: "Solvency" means the plan's ability to fix the problem. "Does this plan actually solve it?")\n\nIt's like saying, "I'm going to fix the leaky roof by painting the walls." That doesn't solve the problem! Your plan has to match the problem.\n\nThe Affirmative needs a **solvency advocate**. (Tech Briefing: A "solvency advocate" is an expert — like a scientist or professor — who says the plan can work.)\n\nThe Negative attacks solvency by arguing:\n• The plan won't work as described\n• There are other causes the plan can't fix\n• The plan might actually make things WORSE — this is called a **turn**\n\nSolvency comes up in almost every round. Being ready to defend your plan is one of the most important skills a Cadet can build.\n\n**Mission Status:** This module covers a lot of new words. If you're feeling overwhelmed, step away for five minutes. Come back with fresh eyes. That's what smart Cadets do.` },
+      { id: "disadvantages", title: "Disadvantages (DAs)", duration: "8 min",
+        content: `**Disadvantages** are the Negative team's secret weapon. Even if the Aff plan fixes the problem, the Neg can argue it creates NEW problems that are even WORSE.\n\n(Tech Briefing: A "Disadvantage" — or "DA" — is an argument that says the Aff plan will cause bad side effects.)\n\nIt's like taking medicine for a headache, but the medicine gives you a stomachache that's ten times worse. Was it worth it?\n\nEvery DA has three parts:\n• **Uniqueness** — Things are okay right now (the bad thing isn't happening yet)\n• **Link** — The Aff plan is what triggers the bad thing\n• **Impact** — The bad thing that happens is really, really serious\n\n**If you face a DA you've never heard before, don't panic!** Try these quick responses:\n• "Our problem is bigger than their DA" (called "case outweighs")\n• "Our problem is happening right NOW" (called "timeframe")\n• "Their link doesn't connect to our specific plan" (called "no link")\n• "Their bad thing is already happening anyway" (called "non-unique")\n\nDAs are an off-case argument and can be really powerful. Talk to your Co-Pilot about which DAs you might face and how to answer them.` }
+    ],
+    quiz: [
+      { q: "How many Stock Issues must the Affirmative prove?", options: ["3", "4", "5", "6"], correct: 2 },
+      { q: "Topicality argues that:", options: ["The plan is too expensive", "The plan doesn't fit the topic", "The plan won't work", "The problem isn't big enough"], correct: 1 },
+      { q: "What does 'Inherency' show?", options: ["The plan fits the topic", "The current system can't solve the problem", "The plan causes new problems", "The evidence is recent"], correct: 1 },
+      { q: "A Disadvantage has which three parts?", options: ["Plan, Agent, Funding", "Uniqueness, Link, Impact", "Claim, Warrant, Impact", "Definition, Violation, Voter"], correct: 1 },
+      { q: "If the Negative wins ONE Stock Issue, what happens?", options: ["Nothing — you need all 5", "The Affirmative case can fall apart", "The round is a tie", "They get extra prep time"], correct: 1 }
+    ]
+  },
+  {
+    id: "aff-case", title: "Building Your Aff Case", subtitle: "Construct your first case from the ground up",
+    icon: "⚡", badge: { name: "Affirmative Architect", icon: "⚡" }, color: "#76ff03",
+    lessons: [
+      { id: "1ac-structure", title: "What Goes Into a 1AC?", duration: "8 min",
+        content: `Building a case is like building a house. You need a strong foundation, solid walls, and a roof that holds everything together. If you skip a step, the whole thing can collapse!\n\nThe **1AC** is the Affirmative team's first speech. (Tech Briefing: "1AC" stands for "1st Affirmative Constructive." It's the speech where the Aff builds their whole case.)\n\nHere's the blueprint — every 1AC needs these parts:\n1. **Significance / Harms** — Show the judge that a real, serious problem exists. Use evidence!\n2. **Inherency** — Explain why the current system can't fix it on its own\n3. **Plan** — Tell the judge exactly what you want to change\n4. **Solvency** — Prove that your plan will actually fix the problem\n\nYour 1AC needs to be a complete case. (Tech Briefing: Debaters call this **"prima facie"** — it's a Latin phrase that means "on its face, it looks complete." If a piece is missing, the Negative team can win just by pointing that out.)\n\nDon't try to memorize all of this today. Read it, talk about it with your Co-Pilot, and come back to it when you start writing your case.` },
+      { id: "evidence-cards", title: "Reading & Cutting Cards", duration: "7 min",
+        content: `In policy debate, you don't just say "I think this is true." You have to PROVE it with evidence from real experts. That evidence is called a **card**.\n\nIt's like writing a research paper for school. You can't just make stuff up — you need sources!\n\nEvery card has three parts:\n• **Tagline** — A short sentence that says what the card proves (this is YOUR words)\n• **Citation** — The author's name, the year, and where the evidence came from\n• **Evidence text** — The actual quote from the expert, with the most important parts underlined\n\nWhen you read a card out loud in a round, you say the tagline, then the author's last name and the year, then read the underlined words.\n\n**Where to find evidence:**\nUse news websites, government reports, and books. Your coach may also give you a starter pack of cards. The best Cadets don't stop there — they do their own research too!\n\nOrganize your cards by topic. Keep your Aff cards in one folder and your Neg cards in another. A messy file can cost you a round!\n\n**Mission Status:** Cutting cards takes time and patience. That's okay. Every card you find makes your case stronger.` },
+      { id: "plan-writing", title: "Writing a Strong Plan", duration: "6 min",
+        content: `Your **plan** is the heart of your case. It's the specific action you want the government to take.\n\nThink of it like writing a recipe. If you just say, "Make cookies," that's not helpful. You need to say exactly what ingredients to use, how much, and for how long.\n\nA good plan answers four questions:\n• **Agent** — Who carries it out? (Usually "The United States federal government")\n• **Mandate** — What exactly will they do?\n• **Enforcement** — How will they make sure it happens?\n• **Funding** — Where does the money come from?\n\nHere's a cool rule: thanks to something called **fiat**, you don't have to prove your plan WOULD pass in Congress. You just have to prove it SHOULD happen. (Tech Briefing: "Fiat" means the judge pretends the plan passes so we can focus on whether it's a good idea.)\n\nKeep your plan clear and specific. If your plan is vague, the Negative team will attack it. Talk to your Co-Pilot and make sure you both understand every word of your plan text.` }
+    ],
+    quiz: [
+      { q: "What does 'prima facie' mean for a 1AC?", options: ["It's the first speech", "The case looks complete on its face", "The evidence is from primary sources", "It must be read quickly"], correct: 1 },
+      { q: "A piece of evidence ('card') has three parts:", options: ["Intro, Body, Conclusion", "Tagline, Citation, Evidence text", "Claim, Link, Impact", "Title, Author, Page number"], correct: 1 },
+      { q: "What does 'fiat' allow the Affirmative to do?", options: ["Speak longer than 8 minutes", "Assume the plan passes so we can debate if it's a good idea", "Skip cross-examination", "Use any evidence they want"], correct: 1 },
+      { q: "A good plan text should include:", options: ["Agent, Mandate, Enforcement, Funding", "Speed, Volume, Tone, Gestures", "Only the topic text", "Just the problem statement"], correct: 0 },
+      { q: "Evidence cards in policy debate should be:", options: ["Summarized in your own words", "Read word-for-word from the source", "Made up on the spot", "Only shown to the judge"], correct: 1 }
+    ]
+  },
+  {
+    id: "neg-strategy", title: "Negative Strategy", subtitle: "Learn the Big 6 ways to defeat any case",
+    icon: "🎯", badge: { name: "Negative Tactician", icon: "🎯" }, color: "#ff4081",
+    lessons: [
+      { id: "big-6", title: "The Big 6 Negative Options", duration: "6 min",
+        content: `Being on the Negative team is like being a goalie in soccer. Your job is to block the other team's shots — and you have SIX different ways to do it!\n\n1. **Topicality (T)** — "Your plan doesn't fit the topic!"\n2. **On-Case attacks** — "Your problem isn't real, or your plan won't fix it!"\n3. **Disadvantages (DAs)** — "Your plan causes new problems!"\n4. **Counterplans (CPs)** — "We have a better idea!" (Tech Briefing: A "Counterplan" is when the Negative suggests a different plan that solves the problem without the Aff's downsides.)\n5. **Kritiks (K)** — "The way you're thinking about this is wrong!" (Tech Briefing: A "Kritik" — yes, it's spelled funny — challenges the IDEAS behind the case, not just the plan.)\n6. **Theory** — "You're being unfair in how you set up this debate!"\n\nFor new Cadets, focus on the first three: Topicality, On-Case attacks, and Disadvantages. These are your core tools. Master them before exploring Counterplans and Kritiks.\n\nTalk to your Co-Pilot about which strategies feel right for you as a team.` },
+      { id: "on-case-neg", title: "On-Case Attacks", duration: "7 min",
+        content: `**On-case** arguments go head-to-head with what the Affirmative said. You're looking right at their case and poking holes in it.\n\n(Tech Briefing: "On-case" means you're attacking the Aff's actual arguments, not bringing in something totally new.)\n\n**Attacking Significance:**\n• "The problem isn't as big as they say"\n• "Their numbers are exaggerated"\n• "There are bigger problems to worry about"\n\n**Attacking Inherency:**\n• "The current system IS working — look at this new law!"\n• "Small changes to what we have now would be enough"\n• "Their evidence is old and things have changed"\n\n**Attacking Solvency:**\n• "The plan won't work the way they describe"\n• "There are other causes the plan can't fix"\n• "The plan actually makes things WORSE" — this is called a **solvency turn**, and it's one of the most powerful moves in debate!\n\nBefore a tournament, scan the cases you think you'll face and build specific attacks for each one. Don't ignore the on-case debate — it wins rounds!` },
+      { id: "neg-block", title: "The Negative Block", duration: "5 min",
+        content: `Here's a secret advantage the Negative team has: the **Negative Block**.\n\n(Tech Briefing: The "Negative Block" is when the 2NC speech and the 1NR speech happen back-to-back. That's 13 minutes of Negative speaking in a row!)\n\nWhy does this matter? Because the Aff's next speaker (the 1AR) only has 5 minutes to answer ALL of that. That's a lot of pressure!\n\n**How to use the Block like a pro:**\n• **Don't repeat each other** — The 2NC and 1NR should cover DIFFERENT arguments\n• **Split the work** — Decide with your Co-Pilot who covers what BEFORE the speeches\n• **Be thorough** — Answer everything the 2AC said\n• **Apply pressure** — The more ground you cover, the harder it is for the 1AR to keep up\n\nThe Negative Block is your most powerful weapon. Use it wisely, and even strong Aff teams will struggle.\n\n**Mission Status:** The Negative side can feel tricky at first because you're reacting to someone else's case. That's okay. With practice, you'll learn to see openings everywhere. A true Cadet keeps training.` }
+    ],
+    quiz: [
+      { q: "How many main Negative strategies are there?", options: ["3", "4", "5", "6"], correct: 3 },
+      { q: "The Negative Block is:", options: ["The 1NR + 2NR back to back", "The 2NC + 1NR (13 minutes in a row)", "All Negative speeches combined", "A timeout the Negative can call"], correct: 1 },
+      { q: "A 'solvency turn' means:", options: ["The plan works even better", "The plan actually makes things WORSE", "The Negative agrees with solvency", "The judge turns to solvency first"], correct: 1 },
+      { q: "For new Cadets, the core strategies are:", options: ["Kritiks and Theory", "Counterplans and Frameworks", "Topicality, On-Case, and DAs", "Speed and volume"], correct: 2 },
+      { q: "Why is the 1AR so hard to give?", options: ["It's the first speech", "You must answer 13 minutes of Neg arguments in just 5", "The judge doesn't listen closely", "You can't use evidence"], correct: 1 }
+    ]
+  },
+  {
+    id: "flowing", title: "The Art of Flowing", subtitle: "Track every argument like a mission controller",
+    icon: "📡", badge: { name: "Flow Master", icon: "📡" }, color: "#7c4dff",
+    lessons: [
+      { id: "flow-basics", title: "What Is Flowing?", duration: "5 min",
+        content: `**Flowing** is just like keeping a scorecard at a baseball game. It helps you remember exactly what happened so you don't get confused by all the action.\n\n(Tech Briefing: "Flowing" is the debater's word for taking notes during a round. Your notes are called your "flow.")\n\nHere's how it works: Turn your paper sideways (landscape). Each speech gets its own column, left to right. As someone speaks, write down their main points in shorthand.\n\nWhen the next speaker responds, write their answer in the next column, right next to the point they're answering. Draw arrows to connect them!\n\n**Why is flowing so important?**\n• You can track what each side has said\n• You can spot **dropped arguments** (Tech Briefing: A "dropped argument" is one the other team forgot to answer)\n• You can organize your own speeches\n• You can help your Co-Pilot prepare their next speech\n\nHere's the key rule: If you don't answer an argument, the judge may count it against you. Dropped arguments are often treated as "You agree with that point." So flow everything!\n\nThis takes practice. Your first few flows might be messy — that's totally normal.` },
+      { id: "flow-techniques", title: "Flow Techniques & Shorthand", duration: "6 min",
+        content: `Ready to level up your flowing? Here are the techniques that experienced debaters use:\n\n**Use abbreviations to write faster:**\n• T = Topicality\n• DA = Disadvantage\n• CP = Counterplan\n• SQ = Status Quo (the way things are now)\n• Sol = Solvency\n• Sig = Significance\n• Inh = Inherency\n\n**More tips:**\n• Use a **different color pen** for each speech — this makes it easy to see who said what\n• **Draw arrows** across columns to connect an argument to its response\n• Only write the **main point** — you don't need to copy whole sentences\n• Use **separate sheets** for separate arguments (one page for the case, one for each DA, one for T, etc.)\n\n**After the round:** Save your flows! They are your flight recorder. (Tech Briefing: A "flight recorder" is the black box that saves data from every flight so you can review what happened.)\n\nLook at your flows later and ask: What worked? What didn't? What surprised me? Talk to your Co-Pilot about what you both noticed.\n\n**Mission Status:** Flowing is a skill that gets better every single round. Don't get frustrated if you miss things at first. Even Commanders started with messy flows.` }
+    ],
+    quiz: [
+      { q: "What is 'flowing' in debate?", options: ["Speaking smoothly", "Taking notes to track all arguments", "A type of evidence format", "Moving between rooms"], correct: 1 },
+      { q: "A dropped argument is usually treated as:", options: ["Unimportant", "Agreed with (you lose it)", "Saved for later", "The judge's decision"], correct: 1 },
+      { q: "What does the abbreviation 'DA' stand for?", options: ["Debate Argument", "Disadvantage", "Direct Attack", "Debate Analysis"], correct: 1 },
+      { q: "After a tournament, old flows are useful for:", options: ["Nothing — throw them away", "Reviewing what worked and what to improve", "Proving you were there", "Showing to the other team"], correct: 1 },
+      { q: "When flowing, you should write:", options: ["Every word spoken", "Only the main point of each argument", "Only your own arguments", "Nothing — just listen"], correct: 1 }
+    ]
+  },
+  {
+    id: "cx-skills", title: "Cross-Examination", subtitle: "Become a detective and find the truth",
+    icon: "🔍", badge: { name: "Cross-Ex Commander", icon: "🔍" }, color: "#ff6e40",
+    lessons: [
+      { id: "cx-purpose", title: "The Purpose of Cross-Ex", duration: "5 min",
+        content: `**Cross-Examination** — or "CX" — is like being a detective. You aren't just talking. You're looking for clues to find the truth.\n\n(Tech Briefing: "Cross-Examination" is a 3-minute question-and-answer period after each Constructive speech. One team asks, the other answers.)\n\n**Use CX to:**\n• **Clarify** — Ask about arguments you didn't understand\n• **Find weaknesses** — Spot holes in their evidence or logic\n• **Set up your next speech** — Get them to say something you can use against them later\n• **Control the conversation** — Keep them on YOUR questions\n\n**CX manners (this matters!):**\n• Be respectful — the judge is watching\n• Ask clear, short questions\n• If they ramble, politely say: "Thanks, but my question was..."\n• LISTEN to their answers! Your Co-Pilot should be writing down what they say\n\nGreat CX can completely change the direction of a round. It's one of the most exciting parts of debate!\n\n**Mission Status:** CX can feel scary at first. That's normal. Start by preparing a few questions before the round. The more you practice, the more natural it will feel.` },
+      { id: "cx-strategy", title: "Asking Smart Questions", duration: "6 min",
+        content: `Want to be a CX pro? Here are the types of questions that win rounds:\n\n**Yes/No questions** — These are your best friend: "Does your plan cost money? Yes or no."\n\n**Follow-up traps** — "Okay, so you agree it costs money. Then where does the funding come from?"\n\n**Evidence checks** — "What does your expert actually say? Can I look at the full card?"\n\n**Logic tests** — "If your plan only fixes part of the problem, doesn't the rest of the problem still exist?"\n\n**What NOT to do in CX:**\n• Don't ask big, open questions like "Tell me about your case" — you'll waste your 3 minutes\n• Don't argue back and forth — save that for your speeches\n• Don't waste time on things that don't matter\n• Don't be mean — judges remember rude behavior\n\n**Cadet Tip:** Before every tournament, write down 5-10 questions you could ask about the cases you expect to face. Having a plan makes CX much less stressful.\n\nRemember: CX isn't scored on its own, but smart questions set up winning arguments in your next speech. Think of it as loading ammunition for later.` }
+    ],
+    quiz: [
+      { q: "How long is each cross-examination period?", options: ["2 minutes", "3 minutes", "5 minutes", "8 minutes"], correct: 1 },
+      { q: "A common mistake new debaters make in CX is:", options: ["Speaking too fast", "Being too aggressive", "Not actually asking questions", "Using too much evidence"], correct: 2 },
+      { q: "You should prepare CX questions:", options: ["During the round only", "BEFORE the tournament", "After the round ends", "Never — just wing it"], correct: 1 },
+      { q: "Which is a BAD CX question?", options: ["Does your plan cost money?", "Can I see the full evidence card?", "Tell me about your case", "Do you agree that X is true?"], correct: 2 },
+      { q: "Who asks questions after the 1AC?", options: ["The 1NC speaker", "The 2NC speaker", "Either Negative speaker", "The judge"], correct: 1 }
+    ]
+  },
+  {
+    id: "tournament-prep", title: "Tournament Day", subtitle: "Prepare for launch and compete with confidence",
+    icon: "🏆", badge: { name: "Tournament Ready", icon: "🏆" }, color: "#ffd740",
+    lessons: [
+      { id: "before-tournament", title: "Pre-Launch Checklist", duration: "4 min",
+        content: `Tournament day is like game day for athletes. You've been training, and now it's time to compete! Here's your pre-launch checklist:\n\n**Before the tournament:**\n• Organize all your evidence files — Aff cards AND Neg cards\n• Practice reading your 1AC out loud and time yourself\n• Build **blocks** (Tech Briefing: "Blocks" are pre-written responses to arguments you think you'll face. Having them ready saves you prep time!)\n• Pack your gear: pens (at least 3 colors), blank paper, a timer, water bottle, and snacks\n• Get a good night's sleep!\n\n**When you arrive:**\n• Check the schedule — know when and where each round is\n• Get to your room early\n• Be polite to judges and the other team\n• Shake hands before and after every round — win or lose\n\nTournaments are exciting but tiring. Pace yourself, eat lunch, and talk to your Co-Pilot between rounds.\n\nYou've been preparing for this, Cadet. Trust your training.` },
+      { id: "after-round", title: "Post-Round Debrief", duration: "4 min",
+        content: `After each round, sit down with your Co-Pilot and **debrief**. (Tech Briefing: A "debrief" is when you review what happened so you can do better next time. Astronauts do this after every mission!)\n\nAsk each other:\n• What arguments worked well?\n• What caught us off guard?\n• Is there evidence we wish we had?\n• How can we organize our files better for the next round?\n\nPull out your flows and scan them together. Your flows are your flight recorder — they hold all the data from the round.\n\n**If you make it to elimination rounds:** Amazing work, Commander! Elim rounds usually have a panel of judges (3 or more) instead of just one.\n\n**If you don't advance:** That's completely okay. Even the best Commanders lose rounds. In this Academy, we don't lose — we learn. Watch other teams' elimination rounds. You'll pick up new strategies just by observing.\n\nEvery round you debate makes you stronger. Win or lose, you're building skills that will help you for the rest of your life.\n\n**Mission Status:** Feeling tired or frustrated after a tough day? That's normal. Talk to your coach, your Co-Pilot, or a friend. Take care of yourself. The mission continues tomorrow.` }
+    ],
+    quiz: [
+      { q: "What should you pack for tournament day?", options: ["Only your phone", "Pens, paper, timer, water, evidence files", "Just your 1AC", "Nothing — the school provides everything"], correct: 1 },
+      { q: "After each round, you should:", options: ["Forget about it and move on", "Debrief with your Co-Pilot and review your flows", "Complain about the judge", "Immediately start a new case"], correct: 1 },
+      { q: "What is a 'block' in debate?", options: ["Writer's block", "A pre-written response to a common argument", "A physical wall in the room", "Blocking the other team's path"], correct: 1 },
+      { q: "Elimination rounds usually have:", options: ["No judges", "One judge", "A panel of judges", "Student judges only"], correct: 2 },
+      { q: "If you DON'T make it to elims, you should:", options: ["Leave right away", "Watch other rounds to learn", "Quit debate", "Argue with the judge"], correct: 1 }
+    ]
+  }
+];
+
+const SPEECH_TIMES = [
+  { label: "1AC / 1NC / 2AC / 2NC", seconds: 480 },
+  { label: "Cross-Examination", seconds: 180 },
+  { label: "1NR / 1AR / 2NR / 2AR", seconds: 300 },
+  { label: "Prep Time", seconds: 480 },
+  { label: "Custom (1 min)", seconds: 60 },
+];
+
+const RANKS = [
+  { name: "New Cadet", minXP: 0, icon: "🌑" },
+  { name: "Cadet", minXP: 50, icon: "🌒" },
+  { name: "Lieutenant", minXP: 150, icon: "🌓" },
+  { name: "Commander", minXP: 300, icon: "🌔" },
+  { name: "Captain", minXP: 500, icon: "🌕" },
+  { name: "Admiral", minXP: 750, icon: "⭐" },
+  { name: "Fleet Admiral", minXP: 1050, icon: "🌟" },
+];
+
+/* ═══════════════════════════════════════════════════════
+   STATE
+   ═══════════════════════════════════════════════════════ */
+let currentView = "home";
+let selectedModuleId = null;
+let selectedLessonIdx = null;
+let completed = new Set();
+let timerInterval = null;
+let timerRunning = false;
+let timerSelectedIdx = 0;
+let timerRemaining = SPEECH_TIMES[0].seconds;
+
+// Performance tracking state
+let perfData = {};  // { moduleId: { quizScores: [0-100, ...], bestScore: 0, totalAttempts: 0 } }
+let totalXP = 0;
+
+// Quiz state
+let quizState = null; // { moduleId, questions, currentIdx, answers: [], score }
+
+// Load saved data
+try {
+  const saved = JSON.parse(localStorage.getItem("pd101_completed") || "[]");
+  completed = new Set(saved);
+} catch(e) {}
+
+try {
+  perfData = JSON.parse(localStorage.getItem("pd101_perf") || "{}");
+} catch(e) { perfData = {}; }
+
+try {
+  totalXP = parseInt(localStorage.getItem("pd101_xp") || "0");
+} catch(e) { totalXP = 0; }
+
+// Init perf data for all modules
+MODULES.forEach(m => {
+  if (!perfData[m.id]) perfData[m.id] = { quizScores: [], bestScore: 0, totalAttempts: 0 };
+});
+
+function saveAll() {
+  try {
+    localStorage.setItem("pd101_completed", JSON.stringify([...completed]));
+    localStorage.setItem("pd101_perf", JSON.stringify(perfData));
+    localStorage.setItem("pd101_xp", String(totalXP));
+  } catch(e) {}
+}
+
+/* ═══════════════════════════════════════════════════════
+   STAR FIELD
+   ═══════════════════════════════════════════════════════ */
+(function initStars() {
+  const canvas = document.getElementById("starfield");
+  const ctx = canvas.getContext("2d");
+  const stars = [];
+  function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+  resize();
+  window.addEventListener("resize", resize);
+  for (let i = 0; i < 120; i++) {
+    stars.push({ x: Math.random() * canvas.width, y: Math.random() * canvas.height,
+      r: Math.random() * 1.5 + 0.3, speed: Math.random() * 0.003 + 0.001, phase: Math.random() * Math.PI * 2 });
+  }
+  function draw(t) {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    for (const s of stars) {
+      const alpha = 0.3 + 0.7 * Math.abs(Math.sin(t * s.speed + s.phase));
+      ctx.beginPath(); ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(180,210,255,${alpha})`; ctx.fill();
+    }
+    requestAnimationFrame(draw);
+  }
+  requestAnimationFrame(draw);
+})();
+
+/* ═══════════════════════════════════════════════════════
+   HELPERS
+   ═══════════════════════════════════════════════════════ */
+function getModule(id) { return MODULES.find(m => m.id === id); }
+function totalLessons() { return MODULES.reduce((s,m) => s + m.lessons.length, 0); }
+function totalCompleted() { return MODULES.reduce((s,m) => s + m.lessons.filter(l => completed.has(l.id)).length, 0); }
+function badgesEarned() { return MODULES.filter(m => m.lessons.every(l => completed.has(l.id))).length; }
+
+function getRankForXP(xp) {
+  let rank = RANKS[0];
+  for (const r of RANKS) { if (xp >= r.minXP) rank = r; }
+  return rank;
+}
+function getNextRank(xp) {
+  for (const r of RANKS) { if (xp > r.minXP) continue; if (xp < r.minXP) return r; }
+  return null;
+}
+function getRank() { return getRankForXP(totalXP).name; }
+
+function renderMarkdown(text) {
+  const lines = text.split("\n");
+  let html = "";
+  for (const line of lines) {
+    if (line.trim() === "") { html += '<div style="height:12px"></div>'; continue; }
+    let processed = line.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+    if (line.trim().startsWith("•") || line.trim().startsWith("- ")) {
+      const content = processed.trim().replace(/^[•\-]\s*/, "");
+      html += `<div class="bullet-line"><span class="bullet-marker">▸</span><span>${content}</span></div>`;
+      continue;
+    }
+    const numMatch = line.trim().match(/^(\d+)\.\s+(.+)/);
+    if (numMatch) {
+      let numContent = numMatch[2].replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+      html += `<div class="bullet-line"><span class="num-marker">${numMatch[1]}.</span><span>${numContent}</span></div>`;
+      continue;
+    }
+    html += `<p>${processed}</p>`;
+  }
+  return html;
+}
+
+function updateNav() {
+  document.getElementById("navModulesBtn").className = "nav-btn" + (currentView !== "timer" && currentView !== "performance" ? " active-cyan" : "");
+  document.getElementById("navPerfBtn").className = "nav-btn" + (currentView === "performance" ? " active-purple" : "");
+  document.getElementById("navTimerBtn").className = "nav-btn" + (currentView === "timer" ? " active-amber" : "");
+}
+
+/* ═══════════════════════════════════════════════════════
+   NAVIGATION
+   ═══════════════════════════════════════════════════════ */
+function goHome() {
+  currentView = "home"; selectedModuleId = null; selectedLessonIdx = null; quizState = null;
+  stopTimer(); updateNav(); renderHome(); window.scrollTo({ top: 0, behavior: "smooth" });
+}
+function goTimer() {
+  currentView = "timer"; quizState = null; updateNav(); renderTimer(); window.scrollTo({ top: 0, behavior: "smooth" });
+}
+function goPerformance() {
+  // If already authenticated this session, go straight through
+  if (teacherAuthenticated) {
+    currentView = "performance"; quizState = null; stopTimer(); updateNav(); renderPerformance(); window.scrollTo({ top: 0, behavior: "smooth" });
+  } else {
+    showPasscodeModal();
+  }
+}
+
+/* ═══════════════════════════════════════════════════════
+   TEACHER PASSCODE GATE
+   ═══════════════════════════════════════════════════════
+   Default passcode: "debate" — change TEACHER_PASSCODE below.
+   Authentication lasts for the current browser session only.
+   ═══════════════════════════════════════════════════════ */
+const TEACHER_PASSCODE = "debate";
+let teacherAuthenticated = false;
+
+// Restore session auth
+try { if (sessionStorage.getItem("pd101_teacher_auth") === "1") teacherAuthenticated = true; } catch(e) {}
+
+function showPasscodeModal() {
+  // Remove existing modal if any
+  const existing = document.getElementById("passcode-modal");
+  if (existing) existing.remove();
+
+  const overlay = document.createElement("div");
+  overlay.id = "passcode-modal";
+  overlay.className = "modal-overlay";
+  overlay.innerHTML = `
+    <div class="modal-box">
+      <div class="modal-icon">🔒</div>
+      <div class="modal-title">Coach Access Only</div>
+      <div class="modal-subtitle">The Performance Dashboard is restricted to coaches and instructors. Enter the passcode to continue.</div>
+      <input type="password" class="modal-input" id="passcode-input" placeholder="••••••" maxlength="20" autocomplete="off">
+      <div class="modal-error-text" id="passcode-error"></div>
+      <div class="modal-btns">
+        <button class="modal-btn modal-btn-secondary" onclick="closePasscodeModal()">Cancel</button>
+        <button class="modal-btn modal-btn-primary" onclick="submitPasscode()">Unlock →</button>
+      </div>
+    </div>`;
+  document.body.appendChild(overlay);
+
+  // Focus the input
+  setTimeout(() => {
+    const input = document.getElementById("passcode-input");
+    if (input) {
+      input.focus();
+      input.addEventListener("keydown", function(e) {
+        if (e.key === "Enter") submitPasscode();
+        if (e.key === "Escape") closePasscodeModal();
+      });
+    }
+  }, 100);
+
+  // Close on overlay click (but not modal box click)
+  overlay.addEventListener("click", function(e) {
+    if (e.target === overlay) closePasscodeModal();
+  });
+}
+
+function closePasscodeModal() {
+  const modal = document.getElementById("passcode-modal");
+  if (modal) modal.remove();
+}
+
+function submitPasscode() {
+  const input = document.getElementById("passcode-input");
+  const errorEl = document.getElementById("passcode-error");
+  if (!input) return;
+
+  const value = input.value.trim().toLowerCase();
+
+  if (value === TEACHER_PASSCODE) {
+    teacherAuthenticated = true;
+    try { sessionStorage.setItem("pd101_teacher_auth", "1"); } catch(e) {}
+    closePasscodeModal();
+    currentView = "performance"; quizState = null; stopTimer(); updateNav(); renderPerformance(); window.scrollTo({ top: 0, behavior: "smooth" });
+  } else {
+    input.classList.add("error");
+    if (errorEl) errorEl.textContent = "Incorrect passcode. Please try again.";
+    setTimeout(() => input.classList.remove("error"), 500);
+    input.value = "";
+    input.focus();
+  }
+}
+function openModule(id) {
+  currentView = "module"; selectedModuleId = id; selectedLessonIdx = null; quizState = null;
+  stopTimer(); updateNav(); renderModuleDetail(); window.scrollTo({ top: 0, behavior: "smooth" });
+}
+function openLesson(moduleId, lessonIdx) {
+  currentView = "lesson"; selectedModuleId = moduleId; selectedLessonIdx = lessonIdx; quizState = null;
+  stopTimer(); updateNav(); renderLesson(); window.scrollTo({ top: 0, behavior: "smooth" });
+}
+function markComplete(lessonId) {
+  if (!completed.has(lessonId)) {
+    completed.add(lessonId);
+    totalXP += 10;
+    saveAll();
+  }
+  renderLesson();
+}
+
+/* ═══════════════════════════════════════════════════════
+   RENDER: HOME
+   ═══════════════════════════════════════════════════════ */
+function renderHome() {
+  const app = document.getElementById("app");
+  const tl = totalLessons(), tc = totalCompleted(), be = badgesEarned();
+  const pct = tl > 0 ? Math.round((tc / tl) * 100) : 0;
+  const rank = getRankForXP(totalXP);
+  const nextRank = getNextRank(totalXP);
+  const xpPct = nextRank ? Math.min(100, ((totalXP - rank.minXP) / (nextRank.minXP - rank.minXP)) * 100) : 100;
+
+  let badgesHTML = "";
+  if (be > 0) {
+    let items = "";
+    MODULES.forEach(m => {
+      if (m.lessons.every(l => completed.has(l.id))) {
+        items += `<span class="badge earned" style="border:1px solid ${m.color};background:${m.color}18;color:${m.color}"><span class="badge-icon">${m.badge.icon}</span>${m.badge.name} ✓</span>`;
+      }
+    });
+    badgesHTML = `<div class="section-label">Your Badges</div><div class="badges-row">${items}</div>`;
+  }
+
+  let moduleCards = "";
+  MODULES.forEach((mod, i) => {
+    const done = mod.lessons.filter(l => completed.has(l.id)).length;
+    const allDone = done === mod.lessons.length;
+    const pctMod = (done / mod.lessons.length) * 100;
+    const stagger = `stagger-${Math.min(i + 1, 7)}`;
+    const pd = perfData[mod.id] || {};
+    const bestScore = pd.bestScore || 0;
+    const attempts = pd.totalAttempts || 0;
+    const scoreTag = attempts > 0
+      ? `<div style="margin-top:8px;display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+           <span style="font-size:11px;color:var(--text-secondary);text-transform:uppercase;letter-spacing:1px;font-weight:600">Quiz Best:</span>
+           <span style="font-size:13px;font-weight:800;color:${bestScore >= 80 ? mod.color : 'var(--text-secondary)'}">${bestScore}%</span>
+           <span style="font-size:11px;color:var(--text-secondary)">(${attempts} attempt${attempts !== 1 ? 's' : ''})</span>
+         </div>`
+      : '';
+    const badgeTag = allDone ? `<div style="margin-top:10px"><span class="badge earned" style="border:1px solid ${mod.color};background:${mod.color}18;color:${mod.color}"><span class="badge-icon">${mod.badge.icon}</span>${mod.badge.name} ✓</span></div>` : "";
+    moduleCards += `
+      <div class="glass-card clickable module-card animate-in ${stagger}" onclick="openModule('${mod.id}')"
+           onmouseenter="this.style.borderColor='${mod.color}44';this.style.boxShadow='0 0 20px ${mod.color}22, inset 0 0 30px ${mod.color}08'"
+           onmouseleave="this.style.borderColor='';this.style.boxShadow=''">
+        <div class="accent-bar" style="background:linear-gradient(90deg,${mod.color},transparent);opacity:${allDone ? 1 : 0.5}"></div>
+        <div class="module-header">
+          <div class="module-icon" style="${allDone ? '' : 'filter:grayscale(0.3)'}">${mod.icon}</div>
+          <div style="flex:1;min-width:0">
+            <div class="module-title">${mod.title}</div>
+            <div class="module-subtitle">${mod.subtitle}</div>
+          </div>
+        </div>
+        <div class="module-progress">
+          <div class="module-track"><div class="module-fill" style="width:${pctMod}%;background:${mod.color}"></div></div>
+          <span class="module-count" style="color:${allDone ? mod.color : 'var(--text-secondary)'}">${done}/${mod.lessons.length}</span>
+        </div>
+        ${scoreTag}
+        ${badgeTag}
+      </div>`;
+  });
+
+  app.innerHTML = `
+    <div class="animate-in">
+      <div class="hero">
+        <div class="hero-icon">🛸</div>
+        <h1>Welcome to <span class="glow-cyan">Policy Debate 101</span></h1>
+        <p>Your mission: learn policy debate one module at a time. Complete lessons, take quizzes, and rank up from Cadet to Commander.</p>
+      </div>
+      <div class="stats-grid">
+        <div class="glass-card stat-card">
+          <div class="stat-label">Lessons</div>
+          <div class="stat-value glow-cyan">${tc}/${tl}</div>
+        </div>
+        <div class="glass-card stat-card">
+          <div class="stat-label">Badges</div>
+          <div class="stat-value glow-amber">${be}/${MODULES.length}</div>
+        </div>
+        <div class="glass-card stat-card">
+          <div class="stat-label">XP</div>
+          <div class="stat-value glow-lime">${totalXP}</div>
+        </div>
+        <div class="glass-card stat-card">
+          <div class="stat-label">Rank</div>
+          <div class="stat-value glow-purple">${rank.icon} ${rank.name}</div>
+        </div>
+      </div>
+      <div class="xp-bar-container">
+        <div class="xp-bar-header">
+          <span class="xp-rank" style="color:var(--gold)">${rank.icon} ${rank.name}</span>
+          <span class="xp-next">${nextRank ? `${nextRank.minXP - totalXP} XP to ${nextRank.name}` : 'Max Rank!'}</span>
+        </div>
+        <div class="xp-bar-track"><div class="xp-bar-fill" style="width:${xpPct}%"></div></div>
+      </div>
+      <div class="progress-container">
+        <div class="progress-header">
+          <span class="progress-label">Mission Progress</span>
+          <span class="progress-pct">${pct}%</span>
+        </div>
+        <div class="progress-track"><div class="progress-fill" style="width:${pct}%"></div></div>
+      </div>
+      ${badgesHTML}
+      <div class="section-label">Training Modules</div>
+      <div class="module-grid">${moduleCards}</div>
+    </div>`;
+}
+
+/* ═══════════════════════════════════════════════════════
+   RENDER: MODULE DETAIL
+   ═══════════════════════════════════════════════════════ */
+function renderModuleDetail() {
+  const mod = getModule(selectedModuleId);
+  if (!mod) return goHome();
+  const app = document.getElementById("app");
+  const done = mod.lessons.filter(l => completed.has(l.id)).length;
+  const allDone = done === mod.lessons.length;
+  const pd = perfData[mod.id] || {};
+
+  const size = 56, sw = 3, r = (size - sw) / 2;
+  const circ = 2 * Math.PI * r;
+  const offset = circ - (done / mod.lessons.length) * circ;
+  const ringHTML = `
+    <div style="position:relative;display:inline-block">
+      <svg width="${size}" height="${size}" class="progress-ring">
+        <circle cx="${size/2}" cy="${size/2}" r="${r}" class="progress-ring-bg" stroke-width="${sw}"/>
+        <circle cx="${size/2}" cy="${size/2}" r="${r}" class="progress-ring-fill" stroke-width="${sw}" stroke="${mod.color}"
+          stroke-dasharray="${circ}" stroke-dashoffset="${offset}"/>
+      </svg>
+      <div class="ring-label" style="color:${mod.color}">${done}/${mod.lessons.length}</div>
+    </div>`;
+
+  const badgeBanner = allDone ? `
+    <div class="badge-earned-banner" style="background:${mod.color}12;border:1px solid ${mod.color}33">
+      <span class="badge earned" style="border:1px solid ${mod.color};background:${mod.color}18;color:${mod.color}"><span class="badge-icon">${mod.badge.icon}</span>${mod.badge.name} ✓</span>
+      <span class="badge-earned-text" style="color:${mod.color}">Module complete! Badge earned, Commander!</span>
+    </div>` : "";
+
+  // Quiz performance card
+  let quizCard = "";
+  if (mod.quiz && mod.quiz.length > 0) {
+    const scores = pd.quizScores || [];
+    const best = pd.bestScore || 0;
+    const attempts = pd.totalAttempts || 0;
+    let historyBars = "";
+    if (scores.length > 0) {
+      const last8 = scores.slice(-8);
+      historyBars = `<div class="score-history">${last8.map(s =>
+        `<div class="score-bar" style="height:${Math.max(4, s * 0.4)}px;width:${Math.floor(100/last8.length)}%;background:${s >= 80 ? mod.color : s >= 60 ? 'var(--amber)' : '#ff1744'};opacity:0.8" title="${s}%"></div>`
+      ).join('')}</div>`;
+    }
+    quizCard = `
+      <div class="glass-card" style="margin-bottom:16px;border-color:${mod.color}22">
+        <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px">
+          <div>
+            <div style="font-size:13px;text-transform:uppercase;letter-spacing:1.5px;color:var(--text-secondary);font-weight:600;margin-bottom:4px">Module Quiz</div>
+            <div style="font-size:14px;color:var(--text-primary)">${attempts > 0 ? `Best: <strong style="color:${mod.color}">${best}%</strong> · ${attempts} attempt${attempts!==1?'s':''}` : 'Not attempted yet'}</div>
+            ${historyBars}
+          </div>
+          <button class="quiz-start-btn" onclick="startQuiz('${mod.id}')"
+            style="border:1px solid ${mod.color}66;background:linear-gradient(135deg,${mod.color}22,${mod.color}44);color:${mod.color}">
+            ${attempts > 0 ? '↻ Retake Quiz' : '▶ Start Quiz'}
+          </button>
+        </div>
+      </div>`;
+  }
+
+  let lessonItems = "";
+  mod.lessons.forEach((lesson, i) => {
+    const isDone = completed.has(lesson.id);
+    lessonItems += `
+      <div class="glass-card clickable lesson-item animate-in stagger-${Math.min(i+1,7)}" onclick="openLesson('${mod.id}',${i})"
+           onmouseenter="this.style.borderColor='${mod.color}44';this.style.boxShadow='0 0 20px ${mod.color}22'"
+           onmouseleave="this.style.borderColor='';this.style.boxShadow=''">
+        <div class="lesson-row">
+          <div class="lesson-number" style="background:${isDone ? mod.color+'22' : 'rgba(255,255,255,0.04)'};color:${isDone ? mod.color : 'var(--text-secondary)'};border:1px solid ${isDone ? mod.color+'44' : 'rgba(255,255,255,0.08)'}">
+            ${isDone ? '✓' : i + 1}
+          </div>
+          <div style="flex:1;min-width:0">
+            <div class="lesson-title-text">${lesson.title}</div>
+            <div class="lesson-duration">${lesson.duration} read</div>
+          </div>
+          <span class="lesson-arrow">→</span>
+        </div>
+      </div>`;
+  });
+
+  app.innerHTML = `
+    <div class="animate-in">
+      <button class="back-btn" onclick="goHome()"><span class="arrow">←</span> Mission Control</button>
+      <div class="glass-card detail-header" style="border-color:${mod.color}33">
+        <div class="accent-bar" style="background:linear-gradient(90deg,${mod.color},transparent)"></div>
+        <div class="detail-header-row">
+          <span class="detail-icon">${mod.icon}</span>
+          <div style="flex:1;min-width:200px">
+            <div class="detail-title">${mod.title}</div>
+            <div class="detail-subtitle">${mod.subtitle}</div>
+          </div>
+          <div class="detail-progress-ring">${ringHTML}</div>
+        </div>
+        ${badgeBanner}
+      </div>
+      ${quizCard}
+      <div class="section-label">Lessons</div>
+      <div class="lesson-list">${lessonItems}</div>
+    </div>`;
+}
+
+/* ═══════════════════════════════════════════════════════
+   RENDER: LESSON
+   ═══════════════════════════════════════════════════════ */
+function renderLesson() {
+  const mod = getModule(selectedModuleId);
+  if (!mod || selectedLessonIdx === null) return goHome();
+  const lesson = mod.lessons[selectedLessonIdx];
+  if (!lesson) return openModule(mod.id);
+  const app = document.getElementById("app");
+  const isDone = completed.has(lesson.id);
+
+  const btnHTML = isDone
+    ? `<div class="completed-label" style="background:${mod.color}18;color:${mod.color};border:1px solid ${mod.color}44">✓ Lesson Complete — +10 XP</div>`
+    : `<button class="complete-btn" onclick="markComplete('${lesson.id}')" style="border:1px solid ${mod.color}66;background:linear-gradient(135deg,${mod.color}22,${mod.color}44);color:${mod.color}">Mark as Complete → (+10 XP)</button>`;
+
+  app.innerHTML = `
+    <div class="animate-in">
+      <button class="back-btn" onclick="openModule('${mod.id}')"><span class="arrow">←</span> Back to ${mod.title}</button>
+      <div class="glass-card lesson-view">
+        <div class="lesson-module-label" style="color:${mod.color}">${mod.icon} Module: ${mod.title}</div>
+        <h2 class="lesson-heading">${lesson.title}</h2>
+        <div class="lesson-meta">Lesson ${selectedLessonIdx + 1} of ${mod.lessons.length} · ${lesson.duration} read</div>
+        <div class="lesson-body">${renderMarkdown(lesson.content)}</div>
+        <div class="complete-btn-area">${btnHTML}</div>
+      </div>
+    </div>`;
+}
+
+/* ═══════════════════════════════════════════════════════
+   QUIZ ENGINE
+   ═══════════════════════════════════════════════════════ */
+function startQuiz(moduleId) {
+  const mod = getModule(moduleId);
+  if (!mod || !mod.quiz) return;
+  selectedModuleId = moduleId;
+  currentView = "quiz";
+  // Shuffle questions
+  const shuffled = [...mod.quiz].sort(() => Math.random() - 0.5);
+  quizState = { moduleId, questions: shuffled, currentIdx: 0, answers: [], score: 0, answered: false, selectedOption: null };
+  updateNav();
+  renderQuiz();
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+function selectQuizOption(optIdx) {
+  if (!quizState || quizState.answered) return;
+  quizState.answered = true;
+  quizState.selectedOption = optIdx;
+  const q = quizState.questions[quizState.currentIdx];
+  const isCorrect = optIdx === q.correct;
+  if (isCorrect) quizState.score++;
+  quizState.answers.push({ questionIdx: quizState.currentIdx, selected: optIdx, correct: q.correct, isCorrect });
+  renderQuiz();
+}
+
+function nextQuizQuestion() {
+  if (!quizState) return;
+  quizState.currentIdx++;
+  quizState.answered = false;
+  quizState.selectedOption = null;
+  if (quizState.currentIdx >= quizState.questions.length) {
+    finishQuiz();
+  } else {
+    renderQuiz();
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+}
+
+function finishQuiz() {
+  const pct = Math.round((quizState.score / quizState.questions.length) * 100);
+  const mid = quizState.moduleId;
+  if (!perfData[mid]) perfData[mid] = { quizScores: [], bestScore: 0, totalAttempts: 0 };
+  perfData[mid].quizScores.push(pct);
+  perfData[mid].totalAttempts++;
+  if (pct > perfData[mid].bestScore) perfData[mid].bestScore = pct;
+  // XP: 2 per correct answer + bonus for 80%+ and 100%
+  let xpEarned = quizState.score * 5;
+  if (pct >= 80) xpEarned += 10;
+  if (pct === 100) xpEarned += 15;
+  totalXP += xpEarned;
+  quizState.xpEarned = xpEarned;
+  quizState.pct = pct;
+  saveAll();
+  renderQuizResults();
+}
+
+function renderQuiz() {
+  if (!quizState) return;
+  const mod = getModule(quizState.moduleId);
+  const q = quizState.questions[quizState.currentIdx];
+  const app = document.getElementById("app");
+  const total = quizState.questions.length;
+  const idx = quizState.currentIdx;
+
+  let optionsHTML = "";
+  q.options.forEach((opt, i) => {
+    let cls = "quiz-option";
+    if (quizState.answered) {
+      if (i === q.correct) cls += " correct";
+      else if (i === quizState.selectedOption && i !== q.correct) cls += " wrong";
+      else cls += " disabled";
+    }
+    optionsHTML += `<button class="${cls}" onclick="selectQuizOption(${i})">${opt}</button>`;
+  });
+
+  let feedbackHTML = "";
+  if (quizState.answered) {
+    const isCorrect = quizState.selectedOption === q.correct;
+    feedbackHTML = `
+      <div class="quiz-feedback" style="background:${isCorrect ? 'rgba(118,255,3,0.1);border:1px solid rgba(118,255,3,0.3);color:var(--lime)' : 'rgba(255,23,68,0.1);border:1px solid rgba(255,23,68,0.3);color:#ff6b7a'}">
+        ${isCorrect ? '✓ Correct! Great work, Commander.' : `✗ Not quite. The correct answer is: <strong>${q.options[q.correct]}</strong>`}
+      </div>
+      <button class="quiz-next-btn" onclick="nextQuizQuestion()">
+        ${idx < total - 1 ? 'Next Question →' : 'See Results →'}
+      </button>`;
+  }
+
+  app.innerHTML = `
+    <div class="animate-in">
+      <button class="back-btn" onclick="openModule('${mod.id}')"><span class="arrow">←</span> Back to ${mod.title}</button>
+      <div class="glass-card quiz-container">
+        <div class="quiz-progress-text" style="color:${mod.color}">Question ${idx + 1} of ${total}</div>
+        <div class="progress-track" style="margin-bottom:24px"><div class="progress-fill" style="width:${((idx + 1) / total) * 100}%;background:${mod.color}"></div></div>
+        <div class="quiz-question-text">${q.q}</div>
+        ${optionsHTML}
+        ${feedbackHTML}
+      </div>
+    </div>`;
+}
+
+function renderQuizResults() {
+  const mod = getModule(quizState.moduleId);
+  const app = document.getElementById("app");
+  const pct = quizState.pct;
+  const scoreColor = pct >= 80 ? mod.color : pct >= 60 ? 'var(--amber)' : '#ff1744';
+  const msg = pct === 100 ? "🌟 PERFECT SCORE! You're a Fleet Admiral in the making!"
+    : pct >= 80 ? "🎯 Outstanding work, Commander! You really know your stuff."
+    : pct >= 60 ? "📈 Good effort, Cadet! Review the lessons and try again to boost your score."
+    : "💪 Keep studying, Cadet. Every great debater started right where you are.";
+
+  // Review missed questions
+  let reviewHTML = "";
+  const missed = quizState.answers.filter(a => !a.isCorrect);
+  if (missed.length > 0) {
+    reviewHTML = `<div style="text-align:left;margin-top:24px">
+      <div class="section-label">Review Missed Questions</div>
+      ${missed.map(a => {
+        const q = quizState.questions[a.questionIdx];
+        return `<div class="glass-card" style="margin-bottom:10px;padding:16px;border-color:#ff174422">
+          <div style="font-size:14px;font-weight:600;color:var(--text-primary);margin-bottom:8px">${q.q}</div>
+          <div style="font-size:13px;color:#ff6b7a;margin-bottom:4px">Your answer: ${q.options[a.selected]}</div>
+          <div style="font-size:13px;color:var(--lime)">Correct answer: ${q.options[a.correct]}</div>
+        </div>`;
+      }).join('')}
+    </div>`;
+  }
+
+  app.innerHTML = `
+    <div class="animate-in">
+      <div class="glass-card quiz-container quiz-results">
+        <div style="font-size:48px;margin-bottom:8px">${pct === 100 ? '🌟' : pct >= 80 ? '🎯' : pct >= 60 ? '📈' : '💪'}</div>
+        <div style="font-size:13px;text-transform:uppercase;letter-spacing:2px;color:var(--text-secondary);font-weight:600">${mod.title} Quiz Complete</div>
+        <div class="quiz-score-big" style="color:${scoreColor}">${pct}%</div>
+        <div style="font-size:14px;color:var(--text-secondary)">${quizState.score} of ${quizState.questions.length} correct</div>
+        <div class="quiz-xp-earned" style="color:var(--gold)">+${quizState.xpEarned} XP earned!</div>
+        <div style="font-size:15px;color:var(--text-secondary);line-height:1.6;max-width:400px;margin:0 auto">${msg}</div>
+        ${reviewHTML}
+        <div style="display:flex;gap:12px;justify-content:center;margin-top:24px;flex-wrap:wrap">
+          <button class="quiz-start-btn" onclick="startQuiz('${mod.id}')" style="border:1px solid ${mod.color}66;background:linear-gradient(135deg,${mod.color}22,${mod.color}44);color:${mod.color}">↻ Retake Quiz</button>
+          <button class="quiz-start-btn" onclick="openModule('${mod.id}')" style="border:1px solid rgba(255,255,255,0.15);background:rgba(255,255,255,0.04);color:var(--text-secondary)">← Back to Module</button>
+        </div>
+      </div>
+    </div>`;
+}
+
+/* ═══════════════════════════════════════════════════════
+   RENDER: PERFORMANCE DASHBOARD
+   ═══════════════════════════════════════════════════════ */
+function renderPerformance() {
+  const app = document.getElementById("app");
+  const rank = getRankForXP(totalXP);
+  const nextRank = getNextRank(totalXP);
+  const xpPct = nextRank ? Math.min(100, ((totalXP - rank.minXP) / (nextRank.minXP - rank.minXP)) * 100) : 100;
+  const tc = totalCompleted(), tl = totalLessons();
+
+  // Overall stats
+  let totalAttempts = 0, totalBestSum = 0, modulesQuizzed = 0;
+  MODULES.forEach(m => {
+    const pd = perfData[m.id] || {};
+    if (pd.totalAttempts > 0) {
+      totalAttempts += pd.totalAttempts;
+      totalBestSum += pd.bestScore;
+      modulesQuizzed++;
+    }
+  });
+  const avgBest = modulesQuizzed > 0 ? Math.round(totalBestSum / modulesQuizzed) : 0;
+
+  let moduleRows = "";
+  MODULES.forEach((mod, i) => {
+    const pd = perfData[mod.id] || {};
+    const done = mod.lessons.filter(l => completed.has(l.id)).length;
+    const lessonPct = (done / mod.lessons.length) * 100;
+    const scores = pd.quizScores || [];
+    const best = pd.bestScore || 0;
+    const attempts = pd.totalAttempts || 0;
+
+    let historyBars = "";
+    if (scores.length > 0) {
+      const last8 = scores.slice(-8);
+      historyBars = `<div class="score-history" style="margin-top:8px;height:32px">${last8.map(s =>
+        `<div class="score-bar" style="height:${Math.max(3, s * 0.32)}px;flex:1;background:${s >= 80 ? mod.color : s >= 60 ? 'var(--amber)' : '#ff1744'};opacity:0.7" title="${s}%"></div>`
+      ).join('')}</div>`;
+    }
+
+    // Mastery level
+    let mastery = "Not Started";
+    let masteryColor = "var(--text-secondary)";
+    if (attempts > 0 && best >= 80 && done === mod.lessons.length) {
+      mastery = "Mastered"; masteryColor = mod.color;
+    } else if (attempts > 0 && best >= 60) {
+      mastery = "Proficient"; masteryColor = "var(--amber)";
+    } else if (attempts > 0 || done > 0) {
+      mastery = "In Progress"; masteryColor = "var(--text-secondary)";
+    }
+
+    moduleRows += `
+      <div class="glass-card perf-module-row animate-in stagger-${Math.min(i+1,7)}" onclick="openModule('${mod.id}')"
+           style="cursor:pointer" 
+           onmouseenter="this.style.borderColor='${mod.color}44'" onmouseleave="this.style.borderColor=''">
+        <div class="perf-icon">${mod.icon}</div>
+        <div class="perf-info">
+          <div class="perf-module-name">${mod.title}</div>
+          <div class="perf-stats-row">
+            <div class="perf-stat">Lessons: <strong>${done}/${mod.lessons.length}</strong></div>
+            <div class="perf-stat">Quiz Best: <strong style="color:${best >= 80 ? mod.color : best >= 60 ? 'var(--amber)' : best > 0 ? '#ff6b7a' : 'var(--text-secondary)'}">${attempts > 0 ? best + '%' : '—'}</strong></div>
+            <div class="perf-stat">Attempts: <strong>${attempts}</strong></div>
+            <div class="perf-stat" style="color:${masteryColor};font-weight:700">${mastery}</div>
+          </div>
+          <div class="perf-bar-track"><div class="perf-bar-fill" style="width:${lessonPct}%;background:${mod.color}"></div></div>
+          ${historyBars}
+        </div>
+      </div>`;
+  });
+
+  app.innerHTML = `
+    <div class="animate-in">
+      <div class="hero" style="margin-bottom:32px">
+        <div style="font-size:40px;margin-bottom:8px">📊</div>
+        <h1><span class="glow-purple">Coach Dashboard</span></h1>
+        <p>Student performance overview. This data is only visible to authenticated coaches.</p>
+        <button onclick="lockDashboard()" style="margin-top:12px;padding:6px 16px;border-radius:8px;border:1px solid rgba(255,255,255,0.1);background:rgba(255,255,255,0.04);color:var(--text-secondary);font-size:12px;font-weight:600;cursor:pointer;font-family:inherit;transition:all 0.2s" onmouseover="this.style.borderColor='#ff174444';this.style.color='#ff6b7a'" onmouseout="this.style.borderColor='rgba(255,255,255,0.1)';this.style.color='var(--text-secondary)'">🔒 Lock Dashboard</button>
+      </div>
+
+      <div class="stats-grid" style="margin-bottom:24px">
+        <div class="glass-card stat-card">
+          <div class="stat-label">Total XP</div>
+          <div class="stat-value glow-lime">${totalXP}</div>
+        </div>
+        <div class="glass-card stat-card">
+          <div class="stat-label">Rank</div>
+          <div class="stat-value glow-purple">${rank.icon} ${rank.name}</div>
+        </div>
+        <div class="glass-card stat-card">
+          <div class="stat-label">Avg Best Score</div>
+          <div class="stat-value" style="color:${avgBest >= 80 ? 'var(--lime)' : avgBest >= 60 ? 'var(--amber)' : 'var(--text-secondary)'}">${modulesQuizzed > 0 ? avgBest + '%' : '—'}</div>
+        </div>
+        <div class="glass-card stat-card">
+          <div class="stat-label">Quiz Attempts</div>
+          <div class="stat-value glow-cyan">${totalAttempts}</div>
+        </div>
+      </div>
+
+      <div class="xp-bar-container" style="margin-bottom:32px">
+        <div class="xp-bar-header">
+          <span class="xp-rank" style="color:var(--gold)">${rank.icon} ${rank.name} — ${totalXP} XP</span>
+          <span class="xp-next">${nextRank ? `${nextRank.minXP - totalXP} XP to ${nextRank.icon} ${nextRank.name}` : '🌟 Max Rank!'}</span>
+        </div>
+        <div class="xp-bar-track"><div class="xp-bar-fill" style="width:${xpPct}%"></div></div>
+      </div>
+
+      <div class="glass-card" style="margin-bottom:24px;padding:16px 20px">
+        <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px">
+          <div>
+            <div class="section-label" style="margin-bottom:4px">How XP Works</div>
+            <div style="font-size:13px;color:var(--text-secondary);line-height:1.6">
+              Complete a lesson: <strong style="color:var(--gold)">+10 XP</strong> · Each correct quiz answer: <strong style="color:var(--gold)">+5 XP</strong> · Score 80%+: <strong style="color:var(--gold)">+10 bonus</strong> · Perfect 100%: <strong style="color:var(--gold)">+25 bonus</strong>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="section-label">Module Breakdown</div>
+      <div class="perf-grid">${moduleRows}</div>
+
+      <div style="text-align:center;margin-top:32px">
+        <button class="quiz-start-btn" onclick="resetAllData()" style="border:1px solid rgba(255,23,68,0.3);background:rgba(255,23,68,0.08);color:#ff6b7a;font-size:12px;padding:8px 20px">
+          ↺ Reset All Progress
+        </button>
+      </div>
+    </div>`;
+}
+
+function resetAllData() {
+  if (!confirm("Are you sure, Cadet? This will erase ALL your progress, XP, and quiz scores. You'd be starting the mission from scratch.")) return;
+  completed = new Set();
+  perfData = {};
+  totalXP = 0;
+  MODULES.forEach(m => { perfData[m.id] = { quizScores: [], bestScore: 0, totalAttempts: 0 }; });
+  saveAll();
+  goHome();
+}
+
+function lockDashboard() {
+  teacherAuthenticated = false;
+  try { sessionStorage.removeItem("pd101_teacher_auth"); } catch(e) {}
+  goHome();
+}
+
+/* ═══════════════════════════════════════════════════════
+   RENDER: TIMER (unchanged)
+   ═══════════════════════════════════════════════════════ */
+function stopTimer() { clearInterval(timerInterval); timerInterval = null; timerRunning = false; }
+
+function renderTimer() {
+  const app = document.getElementById("app");
+  const st = SPEECH_TIMES[timerSelectedIdx];
+  const pct = timerRemaining / st.seconds;
+  const min = Math.floor(timerRemaining / 60);
+  const sec = timerRemaining % 60;
+  const urgentHex = pct > 0.33 ? "#00e5ff" : pct > 0.1 ? "#ffab00" : "#ff1744";
+
+  let selectorBtns = "";
+  SPEECH_TIMES.forEach((t, i) => {
+    selectorBtns += `<button class="timer-select-btn ${i === timerSelectedIdx ? 'active' : ''}" onclick="selectTimerPreset(${i})">${t.label}</button>`;
+  });
+
+  const startLabel = timerRunning ? "■ PAUSE" : (timerRemaining < st.seconds ? "▶ RESUME" : "▶ START");
+
+  const refRows = [
+    ["Constructives (1AC, 1NC, 2AC, 2NC)", "8 min"],
+    ["Cross-Examination", "3 min"],
+    ["Rebuttals (1NR, 1AR, 2NR, 2AR)", "5 min"],
+    ["Prep Time (per team)", "8 min total"]
+  ].map(([l,t]) => `<div class="timer-ref-row"><span class="timer-ref-label">${l}</span><span class="timer-ref-time">${t}</span></div>`).join("");
+
+  app.innerHTML = `
+    <div class="animate-in timer-view">
+      <div class="timer-header">
+        <h2><span class="glow-amber">Speech Timer</span></h2>
+        <p>Select a speech type and hit start. Your warp drive awaits.</p>
+      </div>
+      <div class="glass-card timer-card">
+        <div class="timer-label">Warp Drive Countdown</div>
+        <div class="timer-selectors">${selectorBtns}</div>
+        <div class="timer-display" style="color:${urgentHex};text-shadow:0 0 30px ${urgentHex}44, 0 0 60px ${urgentHex}22">
+          ${String(min).padStart(2,"0")}:${String(sec).padStart(2,"0")}
+        </div>
+        <div class="timer-progress-track">
+          <div class="timer-progress-fill" style="width:${pct*100}%;background:linear-gradient(90deg,${urgentHex},${urgentHex}88)"></div>
+        </div>
+        <div class="timer-controls">
+          <button class="timer-btn" onclick="toggleTimer()" style="border:1px solid ${timerRunning ? '#ff174444' : '#00e5ff44'};background:${timerRunning ? 'rgba(255,23,68,0.2)' : 'linear-gradient(135deg,#00e5ff22,#00e5ff44)'};color:${timerRunning ? '#ff1744' : '#00e5ff'}">${startLabel}</button>
+          <button class="timer-btn" onclick="resetTimer()" style="border:1px solid rgba(255,255,255,0.1);background:rgba(255,255,255,0.04);color:var(--text-secondary)">↺ RESET</button>
+        </div>
+      </div>
+      <div class="glass-card timer-ref">
+        <div class="timer-label">Quick Reference: Speech Times</div>
+        ${refRows}
+      </div>
+    </div>`;
+}
+
+function selectTimerPreset(idx) { stopTimer(); timerSelectedIdx = idx; timerRemaining = SPEECH_TIMES[idx].seconds; renderTimer(); }
+function toggleTimer() {
+  if (timerRunning) { stopTimer(); renderTimer(); }
+  else {
+    if (timerRemaining <= 0) return;
+    timerRunning = true;
+    timerInterval = setInterval(() => {
+      timerRemaining--;
+      if (timerRemaining <= 0) { timerRemaining = 0; stopTimer(); }
+      if (currentView === "timer") renderTimer();
+    }, 1000);
+    renderTimer();
+  }
+}
+function resetTimer() { stopTimer(); timerRemaining = SPEECH_TIMES[timerSelectedIdx].seconds; renderTimer(); }
+
+/* ═══════════════════════════════════════════════════════
+   INIT
+   ═══════════════════════════════════════════════════════ */
+renderHome();
+</script>
+
+
+</body></html>
