@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<!-- saved from url=(0066)file:///Users/ausitnmcnair/Downloads/policy-debate-space-game.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Policy Debate: Space Station Match</title>
+<link href="./DebateDockingBay_Match_files/css2" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+
+:root{
+  --bg-deep:#080b1a;
+  --bg-panel:rgba(12,18,44,0.85);
+  --border-glow:rgba(100,180,255,0.15);
+  --claim-color:#00e5ff;
+  --claim-bg:rgba(0,229,255,0.08);
+  --claim-border:rgba(0,229,255,0.4);
+  --warrant-color:#ff6ef9;
+  --warrant-bg:rgba(255,110,249,0.08);
+  --warrant-border:rgba(255,110,249,0.4);
+  --impact-color:#76ff03;
+  --impact-bg:rgba(118,255,3,0.08);
+  --impact-border:rgba(118,255,3,0.4);
+  --text-primary:#e0e8f8;
+  --text-dim:#7b8db5;
+  --star-color:#fff;
+  --success-glow:rgba(118,255,3,0.6);
+  --error-glow:rgba(255,60,60,0.6);
+}
+
+html,body{
+  height:100%;
+  font-family:'Exo 2',sans-serif;
+  background:var(--bg-deep);
+  color:var(--text-primary);
+  overflow-x:hidden;
+}
+
+/* ── Stars ── */
+.starfield{position:fixed;inset:0;pointer-events:none;z-index:0}
+.starfield span{
+  position:absolute;
+  border-radius:50%;
+  background:var(--star-color);
+  animation:twinkle var(--dur) ease-in-out infinite alternate;
+}
+@keyframes twinkle{0%{opacity:.15;transform:scale(.8)}100%{opacity:1;transform:scale(1.2)}}
+
+/* floating nebula blobs */
+.nebula{
+  position:fixed;
+  border-radius:50%;
+  filter:blur(100px);
+  opacity:.12;
+  pointer-events:none;
+  z-index:0;
+}
+.nebula-1{width:500px;height:500px;top:-120px;left:-100px;background:radial-gradient(circle,#0055ff,transparent)}
+.nebula-2{width:400px;height:400px;bottom:-80px;right:-60px;background:radial-gradient(circle,#a800ff,transparent)}
+.nebula-3{width:350px;height:350px;top:40%;left:55%;background:radial-gradient(circle,#00ffa2,transparent);opacity:.07}
+
+/* ── Layout ── */
+.game-wrapper{
+  position:relative;
+  z-index:1;
+  max-width:1100px;
+  margin:0 auto;
+  padding:24px 20px 40px;
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+}
+
+/* ── Header ── */
+.header{text-align:center;margin-bottom:28px;position:relative}
+.header-badge{
+  display:inline-flex;align-items:center;gap:8px;
+  font-family:'Orbitron',sans-serif;
+  font-size:.65rem;letter-spacing:3px;text-transform:uppercase;
+  color:var(--text-dim);
+  background:var(--bg-panel);
+  border:1px solid var(--border-glow);
+  border-radius:40px;padding:6px 18px;margin-bottom:14px;
+}
+.header-badge .dot{width:6px;height:6px;border-radius:50%;background:#0f0;box-shadow:0 0 6px #0f0;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+.header h1{
+  font-family:'Orbitron',sans-serif;font-size:clamp(1.4rem,4vw,2.2rem);
+  font-weight:900;letter-spacing:2px;
+  background:linear-gradient(135deg,#00e5ff,#ff6ef9,#76ff03);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  background-clip:text;
+  margin-bottom:6px;
+}
+.header p{color:var(--text-dim);font-size:.95rem;font-weight:300}
+
+/* ── Score Bar ── */
+.score-bar{
+  display:flex;align-items:center;justify-content:center;gap:24px;
+  margin-bottom:24px;flex-wrap:wrap;
+}
+.score-item{
+  display:flex;align-items:center;gap:6px;
+  font-family:'Orbitron',sans-serif;font-size:.75rem;
+  color:var(--text-dim);letter-spacing:1px;
+}
+.score-item .val{color:var(--text-primary);font-weight:700;font-size:1rem}
+.streak-badge{
+  background:linear-gradient(135deg,rgba(255,200,0,0.15),rgba(255,120,0,0.15));
+  border:1px solid rgba(255,180,0,0.3);
+  color:#ffc800;border-radius:20px;padding:4px 14px;
+  font-weight:600;font-size:.75rem;
+  animation:glow-streak 1.5s ease-in-out infinite alternate;
+  display:none;
+}
+.streak-badge.show{display:inline-flex;align-items:center;gap:4px}
+@keyframes glow-streak{0%{box-shadow:0 0 8px rgba(255,200,0,0.2)}100%{box-shadow:0 0 20px rgba(255,200,0,0.4)}}
+
+/* ── Game Area ── */
+.game-area{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:24px;
+  flex:1;
+}
+
+/* Drop Zones (Terminals) */
+.terminals{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:16px;
+}
+.terminal{
+  background:var(--bg-panel);
+  border:2px dashed var(--border-glow);
+  border-radius:16px;
+  padding:20px 16px;
+  text-align:center;
+  transition:all .3s ease;
+  min-height:160px;
+  display:flex;flex-direction:column;align-items:center;
+  position:relative;
+  overflow:hidden;
+}
+.terminal::before{
+  content:'';position:absolute;inset:0;border-radius:14px;
+  opacity:0;transition:opacity .3s;pointer-events:none;
+}
+.terminal[data-term="claim"]::before{background:radial-gradient(ellipse at center,var(--claim-bg),transparent 70%)}
+.terminal[data-term="warrant"]::before{background:radial-gradient(ellipse at center,var(--warrant-bg),transparent 70%)}
+.terminal[data-term="impact"]::before{background:radial-gradient(ellipse at center,var(--impact-bg),transparent 70%)}
+.terminal.drag-over::before{opacity:1}
+.terminal.drag-over{transform:scale(1.02)}
+.terminal.drag-over[data-term="claim"]{border-color:var(--claim-color);box-shadow:0 0 30px var(--claim-bg)}
+.terminal.drag-over[data-term="warrant"]{border-color:var(--warrant-color);box-shadow:0 0 30px var(--warrant-bg)}
+.terminal.drag-over[data-term="impact"]{border-color:var(--impact-color);box-shadow:0 0 30px var(--impact-bg)}
+
+.terminal-icon{font-size:1.8rem;margin-bottom:8px;filter:drop-shadow(0 0 8px currentColor)}
+.terminal[data-term="claim"] .terminal-icon{color:var(--claim-color)}
+.terminal[data-term="warrant"] .terminal-icon{color:var(--warrant-color)}
+.terminal[data-term="impact"] .terminal-icon{color:var(--impact-color)}
+
+.terminal-label{
+  font-family:'Orbitron',sans-serif;font-size:1.1rem;font-weight:700;
+  letter-spacing:2px;text-transform:uppercase;margin-bottom:4px;
+}
+.terminal[data-term="claim"] .terminal-label{color:var(--claim-color)}
+.terminal[data-term="warrant"] .terminal-label{color:var(--warrant-color)}
+.terminal[data-term="impact"] .terminal-label{color:var(--impact-color)}
+
+.terminal-hint{font-size:.7rem;color:var(--text-dim);letter-spacing:1px;text-transform:uppercase;opacity:.7}
+.terminal .landed-items{width:100%;margin-top:12px;display:flex;flex-direction:column;gap:8px}
+
+.landed-card{
+  border-radius:10px;padding:10px 14px;
+  font-size:.82rem;font-weight:500;
+  text-align:left;line-height:1.45;
+  animation:land .4s cubic-bezier(.34,1.56,.64,1);
+  position:relative;
+}
+@keyframes land{0%{opacity:0;transform:scale(.8) translateY(-10px)}100%{opacity:1;transform:scale(1) translateY(0)}}
+.landed-card.claim-card{background:var(--claim-bg);border:1px solid var(--claim-border);color:var(--claim-color)}
+.landed-card.warrant-card{background:var(--warrant-bg);border:1px solid var(--warrant-border);color:var(--warrant-color)}
+.landed-card.impact-card{background:var(--impact-bg);border:1px solid var(--impact-border);color:var(--impact-color)}
+
+/* ── Draggable Cards (Cargo) ── */
+.cargo-bay{
+  background:var(--bg-panel);
+  border:1px solid var(--border-glow);
+  border-radius:16px;
+  padding:20px;
+}
+.cargo-label{
+  font-family:'Orbitron',sans-serif;font-size:.65rem;
+  letter-spacing:3px;text-transform:uppercase;
+  color:var(--text-dim);margin-bottom:14px;
+  display:flex;align-items:center;gap:8px;
+}
+.cargo-label::after{content:'';flex:1;height:1px;background:var(--border-glow)}
+
+.cargo-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(260px,1fr));
+  gap:12px;
+}
+
+.cargo-card{
+  background:rgba(20,28,58,0.9);
+  border:1px solid rgba(100,160,255,0.12);
+  border-radius:12px;
+  padding:14px 16px;
+  font-size:.88rem;
+  line-height:1.5;
+  font-weight:400;
+  color:var(--text-primary);
+  cursor:grab;
+  transition:all .25s ease;
+  user-select:none;
+  -webkit-user-select:none;
+  position:relative;
+  overflow:hidden;
+}
+.cargo-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,var(--claim-color),var(--warrant-color),var(--impact-color));
+  opacity:.4;transition:opacity .3s;
+}
+.cargo-card:hover{
+  transform:translateY(-3px);
+  border-color:rgba(100,180,255,0.3);
+  box-shadow:0 8px 30px rgba(0,0,0,0.4);
+}
+.cargo-card:hover::before{opacity:1}
+.cargo-card:active{cursor:grabbing;transform:scale(.97)}
+.cargo-card.dragging{opacity:.35;transform:scale(.95)}
+.cargo-card .card-tag{
+  display:inline-block;font-size:.6rem;font-family:'Orbitron',sans-serif;
+  letter-spacing:2px;text-transform:uppercase;
+  color:var(--text-dim);margin-bottom:6px;
+  background:rgba(100,160,255,0.06);
+  border:1px solid rgba(100,160,255,0.1);
+  border-radius:4px;padding:2px 8px;
+}
+
+/* ── Feedback ── */
+.feedback-flash{
+  position:fixed;top:50%;left:50%;transform:translate(-50%,-50%) scale(0);
+  font-family:'Orbitron',sans-serif;font-size:2rem;font-weight:900;
+  letter-spacing:4px;pointer-events:none;z-index:100;
+  text-shadow:0 0 40px currentColor;
+  opacity:0;
+}
+.feedback-flash.correct{color:#76ff03;animation:flash-in .7s cubic-bezier(.34,1.56,.64,1) forwards}
+.feedback-flash.wrong{color:#ff3c3c;animation:flash-in .7s cubic-bezier(.34,1.56,.64,1) forwards}
+@keyframes flash-in{
+  0%{opacity:0;transform:translate(-50%,-50%) scale(0) rotate(-10deg)}
+  40%{opacity:1;transform:translate(-50%,-50%) scale(1.15) rotate(2deg)}
+  100%{opacity:0;transform:translate(-50%,-50%) scale(.9) translateY(-40px) rotate(0deg)}
+}
+
+/* ── Shake ── */
+.shake{animation:shake .45s ease}
+@keyframes shake{
+  0%,100%{transform:translateX(0)}
+  15%{transform:translateX(-8px)}
+  30%{transform:translateX(8px)}
+  45%{transform:translateX(-6px)}
+  60%{transform:translateX(6px)}
+  75%{transform:translateX(-3px)}
+  90%{transform:translateX(3px)}
+}
+
+/* ── Win Screen ── */
+.win-overlay{
+  position:fixed;inset:0;z-index:200;
+  background:rgba(4,6,18,0.92);
+  display:flex;align-items:center;justify-content:center;
+  flex-direction:column;gap:20px;
+  opacity:0;pointer-events:none;
+  transition:opacity .5s ease;
+  backdrop-filter:blur(8px);
+}
+.win-overlay.show{opacity:1;pointer-events:all}
+.win-title{
+  font-family:'Orbitron',sans-serif;font-size:clamp(1.6rem,5vw,3rem);
+  font-weight:900;letter-spacing:4px;
+  background:linear-gradient(135deg,#76ff03,#00e5ff,#ff6ef9);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  background-clip:text;
+  animation:win-glow 2s ease-in-out infinite alternate;
+  text-align:center;
+}
+@keyframes win-glow{0%{filter:brightness(1)}100%{filter:brightness(1.3)}}
+.win-sub{color:var(--text-dim);font-size:1rem;text-align:center;max-width:440px;line-height:1.6}
+.win-stats{display:flex;gap:32px;flex-wrap:wrap;justify-content:center}
+.win-stat{text-align:center}
+.win-stat .ws-val{font-family:'Orbitron',sans-serif;font-size:1.6rem;font-weight:900;color:var(--claim-color)}
+.win-stat .ws-label{font-size:.7rem;color:var(--text-dim);letter-spacing:2px;text-transform:uppercase;margin-top:2px}
+.btn-restart{
+  font-family:'Orbitron',sans-serif;font-size:.8rem;
+  letter-spacing:3px;text-transform:uppercase;
+  background:linear-gradient(135deg,rgba(0,229,255,0.15),rgba(255,110,249,0.15));
+  border:1px solid rgba(100,180,255,0.3);
+  color:var(--text-primary);
+  padding:14px 36px;border-radius:50px;cursor:pointer;
+  transition:all .3s;
+}
+.btn-restart:hover{
+  background:linear-gradient(135deg,rgba(0,229,255,0.25),rgba(255,110,249,0.25));
+  box-shadow:0 0 30px rgba(100,180,255,0.2);
+  transform:translateY(-2px);
+}
+
+/* ── Confetti ── */
+.confetti-piece{
+  position:fixed;top:-20px;width:8px;height:8px;
+  z-index:210;pointer-events:none;
+  animation:confetti-fall var(--fall-dur) linear forwards;
+}
+@keyframes confetti-fall{
+  0%{transform:translateY(0) rotate(0deg);opacity:1}
+  85%{opacity:1}
+  100%{transform:translateY(110vh) rotate(var(--rot));opacity:0}
+}
+
+/* ── Progress ── */
+.progress-bar{
+  width:100%;height:4px;background:rgba(100,160,255,0.08);
+  border-radius:4px;margin-bottom:20px;overflow:hidden;
+}
+.progress-fill{
+  height:100%;border-radius:4px;
+  background:linear-gradient(90deg,var(--claim-color),var(--warrant-color),var(--impact-color));
+  transition:width .5s cubic-bezier(.34,1.56,.64,1);
+  width:0%;
+}
+
+/* ── Mobile Touch Support ── */
+.touch-ghost{
+  position:fixed;pointer-events:none;z-index:150;
+  background:rgba(20,28,58,0.95);
+  border:2px solid rgba(100,180,255,0.4);
+  border-radius:12px;padding:12px 16px;
+  font-size:.85rem;color:var(--text-primary);
+  max-width:280px;
+  box-shadow:0 12px 40px rgba(0,0,0,0.6);
+  transform:translate(-50%,-50%) rotate(-2deg) scale(1.05);
+  opacity:.95;
+}
+
+/* ── Responsive ── */
+@media(max-width:768px){
+  .terminals{grid-template-columns:1fr}
+  .cargo-grid{grid-template-columns:1fr}
+  .game-wrapper{padding:16px 12px 32px}
+  .terminal{min-height:auto;padding:16px 12px}
+}
+@media(min-width:769px) and (max-width:1024px){
+  .terminals{grid-template-columns:repeat(3,1fr)}
+  .cargo-grid{grid-template-columns:repeat(2,1fr)}
+}
+</style>
+</head>
+<body>
+
+<!-- Stars -->
+<div class="starfield" id="starfield"><span style="width: 2.52319px; height: 2.52319px; left: 27.9276%; top: 25.7188%; animation-delay: 0.265288s;"></span><span style="width: 2.58556px; height: 2.58556px; left: 54.4784%; top: 66.1364%; animation-delay: 3.37547s;"></span><span style="width: 1.24803px; height: 1.24803px; left: 8.86906%; top: 99.3453%; animation-delay: 2.90059s;"></span><span style="width: 0.71474px; height: 0.71474px; left: 15.3452%; top: 29.4554%; animation-delay: 3.36042s;"></span><span style="width: 2.12286px; height: 2.12286px; left: 31.5283%; top: 16.6619%; animation-delay: 3.45269s;"></span><span style="width: 1.48612px; height: 1.48612px; left: 19.6665%; top: 93.4854%; animation-delay: 2.04834s;"></span><span style="width: 0.610792px; height: 0.610792px; left: 33.0641%; top: 45.0809%; animation-delay: 1.20559s;"></span><span style="width: 0.888471px; height: 0.888471px; left: 8.82633%; top: 40.6735%; animation-delay: 3.13906s;"></span><span style="width: 1.88523px; height: 1.88523px; left: 20.7694%; top: 33.8679%; animation-delay: 2.69857s;"></span><span style="width: 0.883663px; height: 0.883663px; left: 51.7205%; top: 42.9738%; animation-delay: 1.51965s;"></span><span style="width: 2.98827px; height: 2.98827px; left: 53.969%; top: 14.0348%; animation-delay: 0.531465s;"></span><span style="width: 1.74183px; height: 1.74183px; left: 12.6216%; top: 43.1804%; animation-delay: 0.819475s;"></span><span style="width: 1.31755px; height: 1.31755px; left: 60.113%; top: 65.9007%; animation-delay: 3.3783s;"></span><span style="width: 0.700666px; height: 0.700666px; left: 2.76344%; top: 79.2569%; animation-delay: 0.694703s;"></span><span style="width: 2.19495px; height: 2.19495px; left: 83.0887%; top: 97.7881%; animation-delay: 1.4188s;"></span><span style="width: 1.77856px; height: 1.77856px; left: 91.9635%; top: 25.9583%; animation-delay: 0.133508s;"></span><span style="width: 1.3773px; height: 1.3773px; left: 32.3025%; top: 83.1819%; animation-delay: 1.91568s;"></span><span style="width: 1.21192px; height: 1.21192px; left: 75.6846%; top: 75.9474%; animation-delay: 1.03865s;"></span><span style="width: 2.87144px; height: 2.87144px; left: 81.6028%; top: 38.447%; animation-delay: 2.36628s;"></span><span style="width: 1.30188px; height: 1.30188px; left: 36.2641%; top: 28.7699%; animation-delay: 1.13207s;"></span><span style="width: 2.0199px; height: 2.0199px; left: 58.5984%; top: 3.16679%; animation-delay: 2.23535s;"></span><span style="width: 2.04199px; height: 2.04199px; left: 78.602%; top: 13.4023%; animation-delay: 3.38638s;"></span><span style="width: 2.41698px; height: 2.41698px; left: 72.5085%; top: 41.5699%; animation-delay: 3.11491s;"></span><span style="width: 2.44062px; height: 2.44062px; left: 9.36417%; top: 93.2487%; animation-delay: 3.45187s;"></span><span style="width: 1.59683px; height: 1.59683px; left: 39.3047%; top: 91.6058%; animation-delay: 3.58093s;"></span><span style="width: 0.599432px; height: 0.599432px; left: 99.537%; top: 92.1671%; animation-delay: 2.9505s;"></span><span style="width: 0.898316px; height: 0.898316px; left: 68.0699%; top: 2.44862%; animation-delay: 3.60429s;"></span><span style="width: 2.89115px; height: 2.89115px; left: 82.4369%; top: 53.0758%; animation-delay: 1.64519s;"></span><span style="width: 0.988769px; height: 0.988769px; left: 36.313%; top: 49.3812%; animation-delay: 3.93873s;"></span><span style="width: 1.63971px; height: 1.63971px; left: 22.2669%; top: 95.9483%; animation-delay: 1.30378s;"></span><span style="width: 0.855024px; height: 0.855024px; left: 62.4324%; top: 12.9546%; animation-delay: 0.472843s;"></span><span style="width: 2.4584px; height: 2.4584px; left: 14.1737%; top: 90.8202%; animation-delay: 2.32845s;"></span><span style="width: 2.39068px; height: 2.39068px; left: 66.5127%; top: 94.4749%; animation-delay: 1.9035s;"></span><span style="width: 1.40801px; height: 1.40801px; left: 83.4425%; top: 36.1723%; animation-delay: 2.24526s;"></span><span style="width: 2.37567px; height: 2.37567px; left: 81.8706%; top: 93.16%; animation-delay: 2.69752s;"></span><span style="width: 0.672406px; height: 0.672406px; left: 90.9687%; top: 34.7094%; animation-delay: 1.20399s;"></span><span style="width: 2.80057px; height: 2.80057px; left: 26.0524%; top: 56.7151%; animation-delay: 2.61747s;"></span><span style="width: 2.3355px; height: 2.3355px; left: 2.8407%; top: 44.9977%; animation-delay: 2.13605s;"></span><span style="width: 1.90898px; height: 1.90898px; left: 76.9545%; top: 69.8831%; animation-delay: 3.4901s;"></span><span style="width: 0.65717px; height: 0.65717px; left: 32.482%; top: 80.31%; animation-delay: 2.30327s;"></span><span style="width: 2.90802px; height: 2.90802px; left: 60.0579%; top: 2.98909%; animation-delay: 0.41085s;"></span><span style="width: 2.51231px; height: 2.51231px; left: 7.95713%; top: 0.0119476%; animation-delay: 1.36813s;"></span><span style="width: 1.57765px; height: 1.57765px; left: 23.6099%; top: 87.9118%; animation-delay: 2.32997s;"></span><span style="width: 1.10466px; height: 1.10466px; left: 15.2202%; top: 93.5225%; animation-delay: 1.47368s;"></span><span style="width: 0.879319px; height: 0.879319px; left: 93.1012%; top: 16.8509%; animation-delay: 2.20112s;"></span><span style="width: 2.10198px; height: 2.10198px; left: 21.5342%; top: 98.4686%; animation-delay: 1.89981s;"></span><span style="width: 2.69589px; height: 2.69589px; left: 0.21226%; top: 12.6763%; animation-delay: 0.0770677s;"></span><span style="width: 2.03617px; height: 2.03617px; left: 78.817%; top: 9.68537%; animation-delay: 0.155965s;"></span><span style="width: 1.86613px; height: 1.86613px; left: 5.18927%; top: 20.2929%; animation-delay: 2.94078s;"></span><span style="width: 1.97195px; height: 1.97195px; left: 58.6457%; top: 11.587%; animation-delay: 1.09849s;"></span><span style="width: 2.31437px; height: 2.31437px; left: 36.35%; top: 38.8413%; animation-delay: 2.29403s;"></span><span style="width: 2.89861px; height: 2.89861px; left: 54.2738%; top: 37.8384%; animation-delay: 2.64293s;"></span><span style="width: 1.91974px; height: 1.91974px; left: 78.1317%; top: 62.5104%; animation-delay: 0.583945s;"></span><span style="width: 2.25887px; height: 2.25887px; left: 25.1946%; top: 34.4062%; animation-delay: 0.224967s;"></span><span style="width: 1.54373px; height: 1.54373px; left: 3.98541%; top: 56.3902%; animation-delay: 1.47968s;"></span><span style="width: 0.900994px; height: 0.900994px; left: 35.7776%; top: 49.4795%; animation-delay: 3.47537s;"></span><span style="width: 2.37156px; height: 2.37156px; left: 82.909%; top: 93.8859%; animation-delay: 1.99994s;"></span><span style="width: 1.00325px; height: 1.00325px; left: 55.9888%; top: 18.0636%; animation-delay: 3.98308s;"></span><span style="width: 0.973137px; height: 0.973137px; left: 16.1456%; top: 82.3189%; animation-delay: 0.566239s;"></span><span style="width: 1.85834px; height: 1.85834px; left: 61.0551%; top: 56.6067%; animation-delay: 1.72737s;"></span><span style="width: 1.96968px; height: 1.96968px; left: 74.6599%; top: 32.1495%; animation-delay: 1.98981s;"></span><span style="width: 1.4034px; height: 1.4034px; left: 1.11328%; top: 89.8082%; animation-delay: 1.89407s;"></span><span style="width: 2.24678px; height: 2.24678px; left: 15.1879%; top: 4.04579%; animation-delay: 1.1471s;"></span><span style="width: 2.62307px; height: 2.62307px; left: 55.6527%; top: 19.5894%; animation-delay: 0.725002s;"></span><span style="width: 2.47781px; height: 2.47781px; left: 91.1944%; top: 15.9561%; animation-delay: 2.85093s;"></span><span style="width: 1.88468px; height: 1.88468px; left: 63.6703%; top: 39.7589%; animation-delay: 0.602403s;"></span><span style="width: 2.27007px; height: 2.27007px; left: 82.9063%; top: 7.28744%; animation-delay: 0.406718s;"></span><span style="width: 1.95272px; height: 1.95272px; left: 69.5156%; top: 33.2655%; animation-delay: 3.14661s;"></span><span style="width: 0.746521px; height: 0.746521px; left: 84.1805%; top: 21.8178%; animation-delay: 0.586728s;"></span><span style="width: 2.43928px; height: 2.43928px; left: 47.6681%; top: 20.2717%; animation-delay: 0.190978s;"></span><span style="width: 2.99002px; height: 2.99002px; left: 2.54142%; top: 75.0982%; animation-delay: 2.94729s;"></span><span style="width: 0.898382px; height: 0.898382px; left: 4.76613%; top: 20.8574%; animation-delay: 3.90566s;"></span><span style="width: 1.40724px; height: 1.40724px; left: 49.546%; top: 99.4294%; animation-delay: 0.504126s;"></span><span style="width: 1.3861px; height: 1.3861px; left: 33.7345%; top: 62.0249%; animation-delay: 1.04621s;"></span><span style="width: 1.60858px; height: 1.60858px; left: 63.3341%; top: 60.9572%; animation-delay: 0.778912s;"></span><span style="width: 2.19977px; height: 2.19977px; left: 91.8719%; top: 69.9366%; animation-delay: 2.33504s;"></span><span style="width: 1.51889px; height: 1.51889px; left: 67.5425%; top: 7.27546%; animation-delay: 3.17468s;"></span><span style="width: 0.729942px; height: 0.729942px; left: 82.9762%; top: 92.9517%; animation-delay: 0.198821s;"></span><span style="width: 2.02361px; height: 2.02361px; left: 66.4953%; top: 36.6381%; animation-delay: 2.06589s;"></span><span style="width: 1.3546px; height: 1.3546px; left: 92.0178%; top: 96.7613%; animation-delay: 2.9065s;"></span><span style="width: 2.68575px; height: 2.68575px; left: 9.8423%; top: 73.1225%; animation-delay: 0.456234s;"></span><span style="width: 2.59233px; height: 2.59233px; left: 51.1063%; top: 9.61833%; animation-delay: 3.70623s;"></span><span style="width: 2.4761px; height: 2.4761px; left: 83.7021%; top: 62.8079%; animation-delay: 0.240247s;"></span><span style="width: 1.00181px; height: 1.00181px; left: 55.6291%; top: 66.998%; animation-delay: 2.89816s;"></span><span style="width: 2.25663px; height: 2.25663px; left: 24.2861%; top: 96.5762%; animation-delay: 2.31957s;"></span><span style="width: 2.85843px; height: 2.85843px; left: 19.2818%; top: 17.8034%; animation-delay: 2.85048s;"></span><span style="width: 1.34446px; height: 1.34446px; left: 90.7428%; top: 9.44543%; animation-delay: 2.28313s;"></span><span style="width: 1.22093px; height: 1.22093px; left: 19.8421%; top: 45.9026%; animation-delay: 2.72312s;"></span><span style="width: 2.86185px; height: 2.86185px; left: 18.6651%; top: 25.0153%; animation-delay: 2.99429s;"></span><span style="width: 2.70697px; height: 2.70697px; left: 86.7085%; top: 31.4802%; animation-delay: 2.86594s;"></span><span style="width: 1.24791px; height: 1.24791px; left: 39.1073%; top: 15.3792%; animation-delay: 1.93582s;"></span><span style="width: 0.871142px; height: 0.871142px; left: 7.59843%; top: 63.8617%; animation-delay: 3.20824s;"></span><span style="width: 1.30346px; height: 1.30346px; left: 16.5925%; top: 12.4978%; animation-delay: 2.21162s;"></span><span style="width: 0.623488px; height: 0.623488px; left: 5.60282%; top: 56.9373%; animation-delay: 3.00726s;"></span><span style="width: 2.57339px; height: 2.57339px; left: 46.9046%; top: 44.5846%; animation-delay: 0.691307s;"></span><span style="width: 1.59318px; height: 1.59318px; left: 60.6996%; top: 68.3414%; animation-delay: 0.952697s;"></span><span style="width: 0.570866px; height: 0.570866px; left: 60.6803%; top: 95.6904%; animation-delay: 3.05772s;"></span><span style="width: 2.11302px; height: 2.11302px; left: 9.09324%; top: 83.8687%; animation-delay: 2.4795s;"></span><span style="width: 2.62937px; height: 2.62937px; left: 52.8056%; top: 81.0267%; animation-delay: 2.31593s;"></span><span style="width: 0.987906px; height: 0.987906px; left: 91.9819%; top: 2.47981%; animation-delay: 0.679401s;"></span><span style="width: 1.74173px; height: 1.74173px; left: 94.0563%; top: 8.73388%; animation-delay: 3.55991s;"></span><span style="width: 2.79617px; height: 2.79617px; left: 24.2453%; top: 77.4219%; animation-delay: 0.410818s;"></span><span style="width: 1.73945px; height: 1.73945px; left: 42.8005%; top: 55.4133%; animation-delay: 3.77312s;"></span><span style="width: 0.790785px; height: 0.790785px; left: 17.7064%; top: 74.9492%; animation-delay: 1.82036s;"></span><span style="width: 1.65695px; height: 1.65695px; left: 16.1471%; top: 75.6034%; animation-delay: 3.43138s;"></span><span style="width: 1.80276px; height: 1.80276px; left: 78.998%; top: 81.8349%; animation-delay: 2.53925s;"></span><span style="width: 1.12951px; height: 1.12951px; left: 1.89518%; top: 5.9407%; animation-delay: 1.50839s;"></span><span style="width: 2.73479px; height: 2.73479px; left: 62.8759%; top: 41.8839%; animation-delay: 0.288586s;"></span><span style="width: 0.537917px; height: 0.537917px; left: 2.04554%; top: 45.6815%; animation-delay: 0.58987s;"></span><span style="width: 0.554637px; height: 0.554637px; left: 38.3825%; top: 86.4375%; animation-delay: 1.51095s;"></span><span style="width: 0.708872px; height: 0.708872px; left: 51.6993%; top: 34.082%; animation-delay: 3.05387s;"></span><span style="width: 1.71974px; height: 1.71974px; left: 77.5103%; top: 34.7929%; animation-delay: 0.15809s;"></span><span style="width: 1.16807px; height: 1.16807px; left: 71.2981%; top: 4.58185%; animation-delay: 1.65799s;"></span><span style="width: 2.21138px; height: 2.21138px; left: 20.2215%; top: 48.9154%; animation-delay: 1.43555s;"></span><span style="width: 2.28588px; height: 2.28588px; left: 32.1233%; top: 76.5746%; animation-delay: 0.29552s;"></span><span style="width: 2.41929px; height: 2.41929px; left: 49.8331%; top: 60.0301%; animation-delay: 2.28326s;"></span><span style="width: 0.546156px; height: 0.546156px; left: 45.6651%; top: 11.9318%; animation-delay: 1.68686s;"></span><span style="width: 1.11167px; height: 1.11167px; left: 99.4021%; top: 70.7751%; animation-delay: 2.67216s;"></span><span style="width: 1.73207px; height: 1.73207px; left: 39.001%; top: 67.043%; animation-delay: 2.52268s;"></span><span style="width: 1.47439px; height: 1.47439px; left: 26.5029%; top: 82.2269%; animation-delay: 3.70018s;"></span></div>
+<div class="nebula nebula-1"></div>
+<div class="nebula nebula-2"></div>
+<div class="nebula nebula-3"></div>
+
+<!-- Feedback flash -->
+<div class="feedback-flash" id="feedback"></div>
+
+<div class="game-wrapper">
+  <!-- Header -->
+  <header class="header">
+    <div class="header-badge"><span class="dot"></span> Station Online</div>
+    <h1>Debate Docking Bay</h1>
+    <p>Drag each cargo card to the correct terminal — Claim, Warrant, or Impact</p>
+  </header>
+
+  <!-- Score -->
+  <div class="score-bar">
+    <div class="score-item">Correct <span class="val" id="scoreCorrect">0</span></div>
+    <div class="score-item">Attempts <span class="val" id="scoreAttempts">0</span></div>
+    <div class="score-item">Cards Left <span class="val" id="cardsLeft">6</span></div>
+    <span class="streak-badge" id="streakBadge">🔥 <span id="streakVal">0</span> streak</span>
+  </div>
+
+  <!-- Progress -->
+  <div class="progress-bar"><div class="progress-fill" id="progressFill" style="width: 0%;"></div></div>
+
+  <!-- Game -->
+  <div class="game-area">
+    <!-- Terminals -->
+    <div class="terminals">
+      <div class="terminal" data-term="claim" id="term-claim">
+        <div class="terminal-icon">📡</div>
+        <div class="terminal-label">Claim</div>
+        <div class="terminal-hint">drop here</div>
+        <div class="landed-items" id="landed-claim"></div>
+      </div>
+      <div class="terminal" data-term="warrant" id="term-warrant">
+        <div class="terminal-icon">🔬</div>
+        <div class="terminal-label">Warrant</div>
+        <div class="terminal-hint">drop here</div>
+        <div class="landed-items" id="landed-warrant"></div>
+      </div>
+      <div class="terminal" data-term="impact" id="term-impact">
+        <div class="terminal-icon">🚀</div>
+        <div class="terminal-label">Impact</div>
+        <div class="terminal-hint">drop here</div>
+        <div class="landed-items" id="landed-impact"></div>
+      </div>
+    </div>
+
+    <!-- Cargo Bay -->
+    <div class="cargo-bay">
+      <div class="cargo-label">⬡ Cargo Bay — drag cards to terminals above</div>
+      <div class="cargo-grid" id="cargoGrid"><div class="cargo-card" draggable="true" data-id="i2"><span class="card-tag">Example</span>"I will get better grades and be successful."</div><div class="cargo-card" draggable="true" data-id="c2"><span class="card-tag">Example</span>"I want a 10:00 PM bedtime."</div><div class="cargo-card" draggable="true" data-id="w1"><span class="card-tag">Definition</span>This is the evidence or the reason that proves your claim is true. It connects your idea to reality with facts, logic, or examples.</div><div class="cargo-card" draggable="true" data-id="w2"><span class="card-tag">Example</span>"I need more time for homework and sports."</div><div class="cargo-card" draggable="true" data-id="c1"><span class="card-tag">Definition</span>This is your main point or the "headline" of your argument. It is a simple statement of what you want or what you believe is true.</div><div class="cargo-card" draggable="true" data-id="i1"><span class="card-tag">Definition</span>This explains why your argument actually matters. It shows the good things that happen if you're right, or the bad things that happen if you're ignored.</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- Win Overlay -->
+<div class="win-overlay" id="winOverlay">
+  <div class="win-title">Mission Complete!</div>
+  <div class="win-sub">All cargo has been sorted to the correct terminals. You've mastered the building blocks of policy debate!</div>
+  <div class="win-stats">
+    <div class="win-stat"><div class="ws-val" id="winAccuracy">100%</div><div class="ws-label">Accuracy</div></div>
+    <div class="win-stat"><div class="ws-val" id="winStreak">0</div><div class="ws-label">Best Streak</div></div>
+  </div>
+  <button class="btn-restart" onclick="restartGame()">Launch Again</button>
+</div>
+
+<script>
+// ── Card data ──
+const CARDS = [
+  { id: 'c1', term: 'claim',   tag: 'Definition', text: 'This is your main point or the "headline" of your argument. It is a simple statement of what you want or what you believe is true.' },
+  { id: 'c2', term: 'claim',   tag: 'Example',    text: '"I want a 10:00 PM bedtime."' },
+  { id: 'w1', term: 'warrant', tag: 'Definition', text: 'This is the evidence or the reason that proves your claim is true. It connects your idea to reality with facts, logic, or examples.' },
+  { id: 'w2', term: 'warrant', tag: 'Example',    text: '"I need more time for homework and sports."' },
+  { id: 'i1', term: 'impact',  tag: 'Definition', text: 'This explains why your argument actually matters. It shows the good things that happen if you\'re right, or the bad things that happen if you\'re ignored.' },
+  { id: 'i2', term: 'impact',  tag: 'Example',    text: '"I will get better grades and be successful."' },
+];
+
+// ── State ──
+let correct = 0, attempts = 0, streak = 0, bestStreak = 0, remaining = 6;
+let draggedId = null;
+
+// ── Stars ──
+(function makeStars(){
+  const sf = document.getElementById('starfield');
+  for(let i = 0; i < 120; i++){
+    const s = document.createElement('span');
+    const size = Math.random() * 2.5 + 0.5;
+    Object.assign(s.style,{
+      width: size+'px', height: size+'px',
+      left: Math.random()*100+'%', top: Math.random()*100+'%',
+      '--dur': (Math.random()*3+2)+'s',
+      animationDelay: Math.random()*4+'s',
+    });
+    sf.appendChild(s);
+  }
+})();
+
+// ── Shuffle ──
+function shuffle(a){ for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]} return a }
+
+// ── Render Cards ──
+function renderCards(){
+  const grid = document.getElementById('cargoGrid');
+  grid.innerHTML = '';
+  shuffle([...CARDS]).forEach(c => {
+    const el = document.createElement('div');
+    el.className = 'cargo-card';
+    el.setAttribute('draggable','true');
+    el.dataset.id = c.id;
+    el.innerHTML = `<span class="card-tag">${c.tag}</span>${c.text}`;
+    // Desktop drag
+    el.addEventListener('dragstart', onDragStart);
+    el.addEventListener('dragend', onDragEnd);
+    // Touch
+    el.addEventListener('touchstart', onTouchStart, {passive:false});
+    el.addEventListener('touchmove', onTouchMove, {passive:false});
+    el.addEventListener('touchend', onTouchEnd);
+    grid.appendChild(el);
+  });
+}
+
+// ── Desktop Drag ──
+function onDragStart(e){
+  draggedId = e.target.closest('.cargo-card').dataset.id;
+  e.target.closest('.cargo-card').classList.add('dragging');
+  e.dataTransfer.effectAllowed = 'move';
+}
+function onDragEnd(e){ e.target.classList.remove('dragging'); draggedId = null; }
+
+document.querySelectorAll('.terminal').forEach(t => {
+  t.addEventListener('dragover', e => { e.preventDefault(); t.classList.add('drag-over'); });
+  t.addEventListener('dragleave', () => t.classList.remove('drag-over'));
+  t.addEventListener('drop', e => {
+    e.preventDefault(); t.classList.remove('drag-over');
+    if(draggedId) handleDrop(draggedId, t.dataset.term);
+  });
+});
+
+// ── Touch Drag ──
+let touchGhost = null, touchCardId = null, touchStarted = false;
+
+function onTouchStart(e){
+  const card = e.target.closest('.cargo-card');
+  if(!card) return;
+  touchCardId = card.dataset.id;
+  touchStarted = true;
+  card.classList.add('dragging');
+
+  // Create ghost
+  touchGhost = document.createElement('div');
+  touchGhost.className = 'touch-ghost';
+  touchGhost.textContent = card.textContent;
+  document.body.appendChild(touchGhost);
+  const t = e.touches[0];
+  touchGhost.style.left = t.clientX + 'px';
+  touchGhost.style.top = t.clientY + 'px';
+}
+function onTouchMove(e){
+  if(!touchStarted) return;
+  e.preventDefault();
+  const t = e.touches[0];
+  if(touchGhost){
+    touchGhost.style.left = t.clientX + 'px';
+    touchGhost.style.top = t.clientY + 'px';
+  }
+  // Highlight terminal under finger
+  document.querySelectorAll('.terminal').forEach(term => {
+    const r = term.getBoundingClientRect();
+    if(t.clientX >= r.left && t.clientX <= r.right && t.clientY >= r.top && t.clientY <= r.bottom){
+      term.classList.add('drag-over');
+    } else {
+      term.classList.remove('drag-over');
+    }
+  });
+}
+function onTouchEnd(e){
+  if(!touchStarted) return;
+  touchStarted = false;
+  if(touchGhost){ touchGhost.remove(); touchGhost = null; }
+  const card = document.querySelector(`.cargo-card[data-id="${touchCardId}"]`);
+  if(card) card.classList.remove('dragging');
+
+  // Find terminal under last touch
+  const t = e.changedTouches[0];
+  let dropped = false;
+  document.querySelectorAll('.terminal').forEach(term => {
+    term.classList.remove('drag-over');
+    const r = term.getBoundingClientRect();
+    if(t.clientX >= r.left && t.clientX <= r.right && t.clientY >= r.top && t.clientY <= r.bottom){
+      handleDrop(touchCardId, term.dataset.term);
+      dropped = true;
+    }
+  });
+  touchCardId = null;
+}
+
+// ── Drop Logic ──
+function handleDrop(cardId, termName){
+  const cardData = CARDS.find(c => c.id === cardId);
+  if(!cardData) return;
+  attempts++;
+
+  if(cardData.term === termName){
+    // Correct
+    correct++; streak++; if(streak > bestStreak) bestStreak = streak;
+    remaining--;
+
+    // Move card visually
+    const cardEl = document.querySelector(`.cargo-card[data-id="${cardId}"]`);
+    if(cardEl) cardEl.remove();
+
+    const landed = document.getElementById('landed-' + termName);
+    const lc = document.createElement('div');
+    lc.className = `landed-card ${termName}-card`;
+    lc.innerHTML = `<span style="font-size:.6rem;font-family:'Orbitron';letter-spacing:1.5px;opacity:.6;display:block;margin-bottom:3px">${cardData.tag}</span>${cardData.text}`;
+    landed.appendChild(lc);
+
+    showFeedback('DOCKED!', 'correct');
+    // Hide hint
+    const terminal = document.getElementById('term-' + termName);
+    const hint = terminal.querySelector('.terminal-hint');
+    if(hint) hint.style.display = 'none';
+  } else {
+    // Wrong
+    streak = 0;
+    const terminal = document.getElementById('term-' + termName);
+    terminal.classList.add('shake');
+    setTimeout(() => terminal.classList.remove('shake'), 500);
+    showFeedback('TRY AGAIN', 'wrong');
+  }
+
+  updateUI();
+  if(remaining === 0) setTimeout(showWin, 700);
+}
+
+function showFeedback(text, type){
+  const fb = document.getElementById('feedback');
+  fb.textContent = text;
+  fb.className = 'feedback-flash ' + type;
+  // Force restart animation
+  fb.style.animation = 'none';
+  fb.offsetHeight;
+  fb.style.animation = '';
+}
+
+function updateUI(){
+  document.getElementById('scoreCorrect').textContent = correct;
+  document.getElementById('scoreAttempts').textContent = attempts;
+  document.getElementById('cardsLeft').textContent = remaining;
+  document.getElementById('progressFill').style.width = ((6 - remaining)/6 * 100) + '%';
+  const badge = document.getElementById('streakBadge');
+  if(streak >= 2){ badge.classList.add('show'); document.getElementById('streakVal').textContent = streak; }
+  else { badge.classList.remove('show'); }
+}
+
+// ── Win ──
+function showWin(){
+  const acc = attempts > 0 ? Math.round((correct / attempts) * 100) : 0;
+  document.getElementById('winAccuracy').textContent = acc + '%';
+  document.getElementById('winStreak').textContent = bestStreak;
+  document.getElementById('winOverlay').classList.add('show');
+  spawnConfetti();
+}
+
+function spawnConfetti(){
+  const colors = ['#00e5ff','#ff6ef9','#76ff03','#ffc800','#ff3c3c','#fff'];
+  for(let i = 0; i < 60; i++){
+    const c = document.createElement('div');
+    c.className = 'confetti-piece';
+    c.style.left = Math.random()*100 + 'vw';
+    c.style.background = colors[Math.floor(Math.random()*colors.length)];
+    c.style.setProperty('--fall-dur', (Math.random()*2+2) + 's');
+    c.style.setProperty('--rot', (Math.random()*720-360) + 'deg');
+    c.style.animationDelay = Math.random()*1.5 + 's';
+    c.style.borderRadius = Math.random()>.5 ? '50%' : '2px';
+    c.style.width = (Math.random()*6+4)+'px';
+    c.style.height = (Math.random()*6+4)+'px';
+    document.body.appendChild(c);
+    setTimeout(()=>c.remove(), 5000);
+  }
+}
+
+function restartGame(){
+  correct=0; attempts=0; streak=0; bestStreak=0; remaining=6;
+  document.getElementById('winOverlay').classList.remove('show');
+  ['claim','warrant','impact'].forEach(t=>{
+    document.getElementById('landed-'+t).innerHTML='';
+    const hint = document.getElementById('term-'+t).querySelector('.terminal-hint');
+    if(hint) hint.style.display='';
+  });
+  updateUI();
+  renderCards();
+}
+
+// ── Init ──
+renderCards();
+updateUI();
+</script>
+
+
+</body></html>
